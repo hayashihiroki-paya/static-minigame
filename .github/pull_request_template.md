@@ -1,5 +1,6 @@
 ## 関連Issue
 
+<!-- GitHubの自動クローズを使う場合は Closes #123 と記載 -->
 Closes #
 
 ## 変更内容
