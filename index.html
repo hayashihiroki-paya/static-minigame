@@ -11,16 +11,27 @@
     <title>static-minigame</title>
   </head>
   <body>
+    <!-- メイン画面はゲーム一覧への入口です。新しいゲームを増やすときは、ここに説明とリンクを追加します。 -->
     <main class="page-shell">
       <header class="intro">
         <p class="eyebrow">PLAY AND LEARN</p>
         <h1>ミニゲーム集</h1>
         <p class="lead">小さなゲームを遊びながら、仕組みも一緒に学べる場所です。</p>
       </header>
-      <section class="empty-state" aria-labelledby="empty-title">
-        <p class="empty-state__icon" aria-hidden="true">🎮</p>
-        <h2 id="empty-title">ゲームを準備中です</h2>
-        <p>最初のゲームが追加されると、ここから遊べるようになります。</p>
+      <!-- ゲームごとのページを独立させ、あとから別の実装方法も並べて試せるようにしています。 -->
+      <section class="game-list" aria-labelledby="games-title">
+        <h2 id="games-title" class="visually-hidden">遊べるゲーム</h2>
+        <article class="game-card">
+          <p class="game-card__number" aria-hidden="true">01</p>
+          <div class="game-card__content">
+            <h3>数字当て</h3>
+            <p>ヒントを頼りに、隠された数字を7回以内に当てよう。</p>
+          </div>
+          <a class="game-card__link" href="./src/games/number-guess/">
+            ゲームで遊ぶ
+            <span aria-hidden="true">→</span>
+          </a>
+        </article>
       </section>
       <footer class="site-footer">
         <p>このサイトは学習を目的に作っています。</p>
