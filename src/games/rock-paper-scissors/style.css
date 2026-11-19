@@ -1,0 +1,181 @@
+/* じゃんけん画面だけにスタイルを適用し、ホームや数字当ての見た目に干渉しません。 */
+.rock-paper-scissors-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+/* 戻る導線は他ゲームと同じ見た目と操作感にそろえます。 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.back-link:focus-visible,
+.hand-button:focus-visible,
+.reset-button:focus-visible {
+  outline: 3px solid #5369c8;
+  outline-offset: 3px;
+}
+
+/* 手の選択、直近の対戦、累計を同じカード内に置き、視線を移動しやすくします。 */
+.rock-paper-scissors-card {
+  width: min(100%, 44rem);
+  margin: 0 auto;
+  padding: clamp(1.25rem, 5vw, 2.5rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.rock-paper-scissors-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* 同じ幅の3ボタンにして、手の違いを見比べながら選べるようにします。 */
+.hand-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+/* ボタンの高さと余白を確保し、タッチでも押しやすくします。 */
+.hand-button {
+  display: flex;
+  min-width: 0;
+  min-height: 7.5rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 0.5rem;
+  border: 1px solid #cfd7eb;
+  border-radius: 1rem;
+  background: #f7f8ff;
+  color: #1c2638;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.hand-button:hover {
+  border-color: #7180d2;
+  background: #eef0ff;
+}
+
+.hand-button__icon {
+  font-size: 2.5rem;
+  line-height: 1;
+}
+
+/* 結果は手と勝敗を一文でまとめ、画面でも読み上げでも見つけやすくします。 */
+.round-feedback {
+  min-height: 3.5rem;
+  margin: 1.5rem 0 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+}
+
+/* 対戦した両者の手を並べ、直近の結果をすぐ振り返れるようにします。 */
+.round-hands {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.round-hands > div {
+  padding: 0.9rem 1rem;
+  border: 1px solid #e2e7f1;
+  border-radius: 0.75rem;
+  background: #fff;
+}
+
+.round-hands dt,
+.score-item dt {
+  color: #566176;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.round-hands dd {
+  margin: 0.25rem 0 0;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.score-section {
+  margin-top: 1.75rem;
+}
+
+.score-board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.score-item {
+  padding: 0.9rem 0.5rem;
+  border-radius: 0.75rem;
+  background: #f4f6fb;
+  text-align: center;
+}
+
+.score-item dd {
+  margin: 0.2rem 0 0;
+  color: #263a91;
+  font-size: 1.5rem;
+  font-weight: 800;
+}
+
+/* リセットボタンも標準のbutton操作を使い、キーボードとタッチの両方に対応します。 */
+.reset-button {
+  min-height: 2.9rem;
+  margin-top: 1rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #edf0f8;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.reset-button:hover {
+  background: #e3e8f4;
+}
+
+/* 狭い幅ではカードの余白とボタン間隔を縮め、3つの選択肢を同時に表示します。 */
+@media (max-width: 420px) {
+  .hand-list,
+  .round-hands,
+  .score-board {
+    gap: 0.5rem;
+  }
+
+  .hand-button {
+    min-height: 6.75rem;
+    padding-inline: 0.25rem;
+  }
+
+  .hand-button__icon {
+    font-size: 2.15rem;
+  }
+
+  .round-hands > div {
+    padding: 0.75rem 0.6rem;
+  }
+}

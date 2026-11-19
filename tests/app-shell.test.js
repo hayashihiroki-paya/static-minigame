@@ -11,6 +11,10 @@ const numberGuessPage = await readFile(
   new URL("../src/games/number-guess/index.html", import.meta.url),
   "utf8",
 );
+const rockPaperScissorsPage = await readFile(
+  new URL("../src/games/rock-paper-scissors/index.html", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -48,6 +52,12 @@ test("home page links to the first game", () => {
   assert.match(page, /数字当て/);
 });
 
+test("home page links to the rock paper scissors game", () => {
+  // ゲームカードからページを開けるようにし、静的ホスト上の実在する相対パスを使います。
+  assert.match(page, /href="\.\/src\/games\/rock-paper-scissors\/"/);
+  assert.match(page, /じゃんけん/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -58,4 +68,14 @@ test("number guessing page announces feedback and loads its local module", () =>
   // 結果をライブ領域で通知し、ルールとは分離した画面モジュールだけを読み込みます。
   assert.match(numberGuessPage, /role="status" aria-live="polite"/);
   assert.match(numberGuessPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("rock paper scissors page has accessible hand buttons and live results", () => {
+  // 手のボタンはキーボードで操作でき、勝敗はライブ領域で通知されることを確認します。
+  assert.match(rockPaperScissorsPage, /<html lang="ja">/);
+  assert.match(rockPaperScissorsPage, /data-hand="rock" aria-label="グーを出す"/);
+  assert.match(rockPaperScissorsPage, /data-hand="scissors" aria-label="チョキを出す"/);
+  assert.match(rockPaperScissorsPage, /data-hand="paper" aria-label="パーを出す"/);
+  assert.match(rockPaperScissorsPage, /role="status" aria-live="polite" aria-atomic="true"/);
+  assert.match(rockPaperScissorsPage, /<script type="module" src="\.\/main\.js"><\/script>/);
 });
