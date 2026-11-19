@@ -25,6 +25,10 @@ Pull Requestにする前に、次のコマンドを実行します。
 
 このコマンドはJavaScriptの構文と自動テストを確認します。同じチェックはGitHub Actionsでも実行します。現在はHTML・CSS・JavaScriptを直接配信するため、ビルド工程はありません。
 
+## GitHubの初回設定
+
+CIの成功をマージの必須条件にするには、GitHubの Settings → Branches で main のブランチ保護ルールを追加し、Pull Request経由の変更と Quality / quality の成功を必須にします。この設定がない場合、CIは結果を表示しますが、失敗した変更のマージを防ぎません。
+
 ## 開発の約束
 
 - すべての作業はGitHub Issueで管理します。変更を始める前にIssueを作り、目的と完了条件を記載します。
