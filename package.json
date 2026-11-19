@@ -1,0 +1,14 @@
+{
+  "name": "static-minigame",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "scripts": {
+    "test": "node --test",
+    "check:syntax": "node scripts/check-syntax.js",
+    "check": "npm run check:syntax && npm test"
+  }
+}
