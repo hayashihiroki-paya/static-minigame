@@ -1,0 +1,51 @@
+name: バグ報告
+description: 再現できる不具合を記録します
+title: "[不具合] "
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: 不具合の概要
+      description: どのゲームや画面で、何が起きますか？
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 再現手順
+      description: 不具合が起きるまでの操作を順番に書いてください。
+      placeholder: |
+        1.
+        2.
+        3.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 期待する動作と実際の動作
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: 環境
+      description: ブラウザー、画面サイズ、キーボード・タッチなど、分かる範囲で記載してください。
+    validations:
+      required: false
+  - type: textarea
+    id: tests
+    attributes:
+      label: 修正後の確認方法
+      description: 再発防止の自動テストと、必要な手動確認を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: work_log
+    attributes:
+      label: 作業ログ
+      description: 着手後、重要な進捗・判断と完了時の結果を追記します。
+      value: |
+        - 着手:
+        - 進捗・判断:
+        - 完了・確認結果:

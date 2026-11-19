@@ -1,0 +1,44 @@
+name: 機能・ゲームの作業
+description: 新しいゲームや既存機能の変更を管理します
+title: "[機能] "
+body:
+  - type: textarea
+    id: purpose
+    attributes:
+      label: 目的・学習ポイント
+      description: 何を実現し、どんなことを学べる作業ですか？
+      placeholder: 解決したいことと、学習上のねらいを書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 仕様・対象範囲
+      description: ゲームのルール、操作、開始・終了条件、対象画面などを書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: 完了条件
+      description: 作業が完了したと判断できる条件をチェックリストで書いてください。
+      value: |
+        - [ ]
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: テスト・確認方法
+      description: 追加する自動テストと、必要な手動確認を書いてください。
+    validations:
+      required: true
+  - type: textarea
+    id: work_log
+    attributes:
+      label: 作業ログ
+      description: 着手後、重要な進捗・判断と完了時の結果を追記します。
+      value: |
+        - 着手:
+        - 進捗・判断:
+        - 完了・確認結果:
