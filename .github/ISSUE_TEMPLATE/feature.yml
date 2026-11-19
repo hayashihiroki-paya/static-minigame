@@ -1,8 +1,6 @@
 name: 機能・ゲームの作業
 description: 新しいゲームや既存機能の変更を管理します
-title: "[Feature] "
-labels:
-  - enhancement
+title: "[機能] "
 body:
   - type: textarea
     id: purpose
