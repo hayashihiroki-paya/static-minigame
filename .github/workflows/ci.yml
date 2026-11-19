@@ -1,4 +1,4 @@
-name: Quality
+name: 品質チェック
 
 on:
   push:
@@ -15,14 +15,14 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository
+      - name: リポジトリを取得
         uses: actions/checkout@v4
-      - name: Set up Node.js
+      - name: Node.jsを設定
         uses: actions/setup-node@v4
         with:
           node-version-file: .nvmrc
           cache: npm
-      - name: Install dependencies
+      - name: 依存関係をインストール
         run: npm ci
-      - name: Run quality checks
+      - name: 品質チェックを実行
         run: npm run check
