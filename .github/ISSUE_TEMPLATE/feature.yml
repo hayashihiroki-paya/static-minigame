@@ -34,11 +34,19 @@ body:
     validations:
       required: true
   - type: textarea
-    id: work_log
+    id: roles
     attributes:
-      label: 作業ログ
-      description: 着手後、重要な進捗・判断と完了時の結果を追記します。
+      label: 担当・優先度
+      description: 依頼者、実装担当、レビュアー、優先度を記載してください。未定の場合は着手時に決めます。
       value: |
-        - 着手:
-        - 進捗・判断:
-        - 完了・確認結果:
+        - 依頼者・最終承認者:
+        - 実装担当:
+        - レビュアー:
+        - 優先度:
+    validations:
+      required: true
+  - type: markdown
+    attributes:
+      value: |
+        ### 作業ログ
+        作業ログはIssue本文を上書きせず、コメントに追記します。日時、担当と役割、進捗、判断、確認結果、次の作業またはブロッカーを記録してください。
