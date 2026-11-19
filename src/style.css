@@ -103,3 +103,84 @@ h1 {
 .site-footer p {
   margin-bottom: 0;
 }
+
+/* ホーム一覧はカードを1列に並べ、ゲームが増えても説明と操作を見つけやすくします。 */
+.game-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.game-card {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.25rem;
+  padding: clamp(1.25rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.25rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 6%);
+}
+
+.game-card__number {
+  display: grid;
+  width: 3rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 1rem;
+  background: #eef0ff;
+  color: #5360b9;
+  font-weight: 800;
+}
+
+.game-card__content h3 {
+  margin: 0 0 0.35rem;
+  font-size: 1.25rem;
+}
+
+.game-card__content p {
+  margin: 0;
+  color: #566176;
+  line-height: 1.6;
+}
+
+/* 明確な輪郭により、キーボード利用時に次の操作位置を見失わないようにします。 */
+.game-card__link:focus-visible {
+  border-radius: 0.25rem;
+  outline: 3px solid #5369c8;
+  outline-offset: 4px;
+}
+
+.game-card__link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  gap: 0.5rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.2em;
+}
+
+/* 見出しはスクリーンリーダーに残し、画面ではカードをすっきり見せます。 */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+/* 狭い画面ではリンクを次の行に置き、文字とタップ領域に十分な幅を残します。 */
+@media (max-width: 600px) {
+  .game-card {
+    grid-template-columns: auto 1fr;
+  }
+
+  .game-card__link {
+    grid-column: 2;
+    justify-self: start;
+  }
+}

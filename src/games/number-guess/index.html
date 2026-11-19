@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="1から100までの数字を、ヒントを頼りに当てるゲームです。"
+    />
+    <!-- ゲームページから共有スタイルへは相対パスで戻り、静的ホストのサブパスでも動くようにします。 -->
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>数字当て | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- ゲームの説明と操作をmainにまとめ、フォーム送信をボタンとEnterキーで共通処理します。 -->
+    <main class="page-shell number-guess-page">
+      <header class="number-guess-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <p class="eyebrow">NUMBER GUESS</p>
+        <h1>数字当て</h1>
+        <p class="lead">1から100までの数字を、7回以内に当ててください。</p>
+      </header>
+
+      <section class="number-guess-card" aria-labelledby="game-instructions">
+        <h2 id="game-instructions">遊び方</h2>
+        <p>数字を入力して「予想する」を押します。予想が外れると、答えがもっと大きいか小さいかをお知らせします。</p>
+
+        <form id="guess-form" class="guess-form" novalidate>
+          <label for="guess-input">予想する数字</label>
+          <p id="input-help" class="input-help">1から100までの整数を入力してください。</p>
+          <div class="guess-form__controls">
+            <input
+              id="guess-input"
+              name="guess"
+              type="number"
+              min="1"
+              max="100"
+              step="1"
+              inputmode="numeric"
+              aria-describedby="input-help"
+              autocomplete="off"
+            />
+            <button id="guess-button" class="button button--primary" type="submit">
+              予想する
+            </button>
+          </div>
+        </form>
+
+        <!-- aria-liveにより、予想結果や入力エラーをスクリーンリーダーにも通知します。 -->
+        <p id="game-feedback" class="game-feedback" role="status" aria-live="polite">
+          1から100までの数字を入力してください。
+        </p>
+        <p id="attempt-counter" class="attempt-counter">残り7回</p>
+        <button id="restart-button" class="button button--secondary" type="button" hidden>
+          もう一度遊ぶ
+        </button>
+      </section>
+
+      <footer class="site-footer">
+        <p>数字の大小を比べる条件分岐を使ったゲームです。</p>
+      </footer>
+    </main>
+
+    <!-- このゲームだけのJavaScriptを読み込み、別ゲームの処理と混ざらないようにします。 -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

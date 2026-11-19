@@ -1,0 +1,133 @@
+/* このスタイルは数字当てのカードと操作だけに適用し、ホーム画面の見た目を保ちます。 */
+.number-guess-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+/* ホームへ戻る導線は見出しの上に置き、ゲーム開始前後の移動先を明確にします。 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.back-link:focus-visible,
+.button:focus-visible,
+.guess-form input:focus-visible {
+  outline: 3px solid #5369c8;
+  outline-offset: 3px;
+}
+
+/* ゲームの説明、入力、結果を一枚にまとめて画面サイズが変わっても流れを追えるようにします。 */
+.number-guess-card {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: clamp(1.5rem, 5vw, 3rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.number-guess-card h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.35rem;
+}
+
+.number-guess-card > p {
+  color: #566176;
+  line-height: 1.75;
+}
+
+/* ラベルと補足を入力欄に結び、数字を何のために入力するか伝えます。 */
+.guess-form {
+  margin-top: 2rem;
+}
+
+.guess-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 800;
+}
+
+.input-help {
+  margin-bottom: 0.75rem;
+  color: #566176;
+  font-size: 0.95rem;
+}
+
+.guess-form__controls {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.guess-form input {
+  width: 100%;
+  min-width: 0;
+  min-height: 3rem;
+  padding: 0.65rem 0.8rem;
+  border: 1px solid #9aa5bc;
+  border-radius: 0.75rem;
+  background: #fff;
+  color: #1c2638;
+  font: inherit;
+  font-size: 1.1rem;
+}
+
+/* ボタンには押せる広さを与え、無効状態でも操作できないことを色で伝えます。 */
+.button {
+  min-height: 2.9rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+}
+
+.button--primary {
+  flex: 0 0 auto;
+  background: #4355b8;
+  color: #fff;
+}
+
+.button--secondary {
+  background: #edf0f8;
+  color: #263456;
+}
+
+.button:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+}
+
+/* status領域を書き換えると、視覚表示とスクリーンリーダーの読み上げを同時に更新できます。 */
+.game-feedback {
+  min-height: 3.4rem;
+  margin: 1.5rem 0 0.5rem;
+  padding: 0.9rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.attempt-counter {
+  margin-bottom: 1rem;
+  color: #566176;
+  font-weight: 700;
+}
+
+/* モバイルではフォームを縦に積み、入力と予想ボタンをそれぞれ押しやすくします。 */
+@media (max-width: 520px) {
+  .guess-form__controls {
+    flex-direction: column;
+  }
+
+  .button--primary {
+    width: 100%;
+  }
+}
