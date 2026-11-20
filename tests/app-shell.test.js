@@ -23,6 +23,10 @@ const ticTacToePage = await readFile(
   new URL("../src/games/tic-tac-toe/index.html", import.meta.url),
   "utf8",
 );
+const lightsOutSourcePage = await readFile(
+  new URL("../src/games/lights-out/index.html", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -78,6 +82,12 @@ test("home page links to the tic-tac-toe game", () => {
   assert.match(page, /マルバツゲーム/);
 });
 
+test("home page links to the built lights-out game", () => {
+  // TypeScriptは直接配信できないため、ホームはViteの静的出力先へ案内します。
+  assert.match(page, /href="\.\/dist\/games\/lights-out\/"/);
+  assert.match(page, /ライツアウト/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -116,4 +126,13 @@ test("tic-tac-toe page has a named board, live status and reset control", () => 
   assert.match(ticTacToePage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
   assert.match(ticTacToePage, /id="reset-button"[^>]*type="button"/);
   assert.match(ticTacToePage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("lights-out source page loads the TypeScript entry and names the game controls", () => {
+  // ビルド元のHTMLがTypeScriptの入口・盤面・状態通知・リセットを持つことを確認します。
+  assert.match(lightsOutSourcePage, /<html lang="ja">/);
+  assert.match(lightsOutSourcePage, /id="lights-out-board"[^>]*aria-label="ライツアウトの盤面"/);
+  assert.match(lightsOutSourcePage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(lightsOutSourcePage, /id="reset-button"[^>]*type="button"/);
+  assert.match(lightsOutSourcePage, /<script type="module" src="\.\/main\.ts"><\/script>/);
 });

@@ -9,6 +9,12 @@
   "scripts": {
     "test": "node --test",
     "check:syntax": "node scripts/check-syntax.js",
-    "check": "npm run check:syntax && npm test"
+    "check:types": "tsc --project tsconfig.json",
+    "check": "npm run check:syntax && npm run check:types && npm test",
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8"
   }
 }
