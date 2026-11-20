@@ -11,9 +11,12 @@
     "check:syntax": "node scripts/check-syntax.js",
     "check:types": "tsc --project tsconfig.json",
     "check": "npm run check:syntax && npm run check:types && npm test",
-    "build": "vite build"
+    "build": "vite build",
+    "build:snake": "vite build --config vite.snake.config.js"
   },
   "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "svelte": "^5.58.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.8"
   }
