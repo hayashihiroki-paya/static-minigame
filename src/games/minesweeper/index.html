@@ -11,16 +11,19 @@
   <body>
     <!-- 盤面と操作モードを標準ボタンで用意し、タッチ・キーボードでも遊べるようにします。 -->
     <main class="page-shell minesweeper-page">
+      <!-- ゲーム一覧への戻り道と、初めて見る人向けの目的を見出しにまとめます。 -->
       <header class="minesweeper-header">
         <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
         <h1>マインスイーパー</h1>
         <p class="lead">地雷を避けながらマスを開き、数字を手がかりに安全な場所を探そう。</p>
       </header>
 
+      <!-- 得点代わりの旗数、入力モード、盤面、結果通知をゲーム領域としてまとめます。 -->
       <section class="minesweeper-card" aria-labelledby="game-heading">
         <h2 id="game-heading">ゲーム画面</h2>
         <p class="minesweeper-progress" id="flag-count">旗 0 / 10</p>
 
+        <!-- 明示的なモードボタンなら右クリックに頼らず、タッチでも旗を付けられます。 -->
         <div class="minesweeper-modes" role="group" aria-label="マスの操作モード">
           <button id="reveal-mode-button" class="minesweeper-button minesweeper-button--selected" type="button" aria-pressed="true">
             開くモード
@@ -33,9 +36,11 @@
           </button>
         </div>
 
+        <!-- 矢印キーでセル間を移動し、標準ボタンのEnter/Space操作で選択します。 -->
         <p class="minesweeper-help" id="control-help">
           マスを選んでEnterまたはSpaceで操作します。矢印キーでマス間を移動できます。旗を付けるときは旗モードに切り替えてください。
         </p>
+        <!-- gridの中へJavaScriptでrow/gridcellと81個の操作ボタンを生成します。 -->
         <div
           id="minesweeper-board"
           class="minesweeper-board"
@@ -43,11 +48,13 @@
           aria-label="9行9列のマインスイーパー盤面"
           aria-describedby="control-help game-feedback"
         ></div>
+        <!-- 操作や勝敗はライブ領域で通知し、色や盤面だけに情報を任せません。 -->
         <p id="game-feedback" class="minesweeper-feedback" role="status" aria-live="polite" aria-atomic="true">
           最初に開くマスは地雷になりません。
         </p>
       </section>
 
+      <!-- 数字と旗の意味を画面下にも残し、ゲーム中に確認できるようにします。 -->
       <footer class="site-footer">
         <p>数字は隣り合う8マスにある地雷の数です。旗モードで地雷だと思う場所に印を付けられます。</p>
       </footer>
