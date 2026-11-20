@@ -1,0 +1,204 @@
+/* サイモンゲームだけにスタイルを適用し、既存の画面に影響させません。 */
+.simon-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.simon-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.simon-card {
+  width: min(100%, 38rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.simon-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.simon-progress {
+  margin: 0 0 1rem;
+}
+
+.simon-progress div {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 0.65rem 1rem;
+  border-radius: 0.75rem;
+  background: #f3f5fc;
+}
+
+.simon-progress dt {
+  color: #566176;
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.simon-progress dd {
+  margin: 0;
+  color: #263a91;
+  font-size: 1.4rem;
+  font-weight: 800;
+}
+
+/* 2×2のパッドはスマートフォンでも押しやすい面積を保ちます。 */
+.simon-pads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(0.55rem, 2vw, 0.9rem);
+}
+
+.simon-pad {
+  display: flex;
+  min-height: clamp(7rem, 28vw, 10rem);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  border: 3px solid rgb(25 35 55 / 20%);
+  border-radius: 1.25rem;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(0.95rem, 3vw, 1.15rem);
+  font-weight: 800;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 35%);
+  touch-action: manipulation;
+  transition: filter 120ms ease, transform 120ms ease, box-shadow 120ms ease;
+}
+
+.simon-pad--red {
+  background: #bd3f4a;
+}
+
+.simon-pad--blue {
+  background: #315ab1;
+}
+
+.simon-pad--yellow {
+  background: #9b6700;
+}
+
+.simon-pad--green {
+  background: #27724b;
+}
+
+.simon-pad__symbol {
+  font-size: clamp(1.8rem, 7vw, 2.6rem);
+  line-height: 1;
+}
+
+.simon-pad:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.simon-pad.is-active {
+  filter: brightness(1.65);
+  transform: scale(0.97);
+  box-shadow: 0 0 0 5px #fff, 0 0 0 8px #263a91;
+}
+
+.simon-pad:focus-visible,
+.simon-button:focus-visible,
+.simon-page .back-link:focus-visible {
+  outline: 3px solid #263a91;
+  outline-offset: 4px;
+}
+
+.simon-pad:disabled {
+  cursor: default;
+}
+
+.simon-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.65rem;
+  margin-top: 1rem;
+}
+
+.simon-button {
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.75rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.simon-button:hover:not(:disabled) {
+  background: #eef0ff;
+}
+
+.simon-button--primary {
+  border-color: #3649a5;
+  background: #4357b6;
+  color: #fff;
+}
+
+.simon-button--primary:hover:not(:disabled) {
+  background: #34479f;
+}
+
+.simon-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.58;
+}
+
+.simon-help,
+.simon-audio-notice {
+  margin: 0.85rem 0 0;
+  color: #566176;
+  font-size: 0.92rem;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.simon-audio-notice {
+  min-height: 1.7em;
+}
+
+.simon-feedback {
+  min-height: 3.5rem;
+  margin: 1rem 0 0;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .simon-card {
+    padding: 0.8rem;
+  }
+
+  .simon-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .simon-button--primary {
+    grid-column: 1 / -1;
+  }
+}

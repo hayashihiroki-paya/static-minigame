@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="光と音の順番を覚えて、同じ順にパッドを押すサイモンゲームです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>サイモンゲーム | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- 視覚・音声の手がかり、入力ボタン、状態通知を一つの画面にまとめます。 -->
+    <main class="page-shell simon-page">
+      <header class="simon-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>サイモンゲーム</h1>
+        <p class="lead">光と音の順番を覚えて、同じ順に押そう。</p>
+      </header>
+
+      <section class="simon-card" aria-labelledby="game-heading">
+        <h2 id="game-heading">ゲーム画面</h2>
+
+        <dl class="simon-progress">
+          <div>
+            <dt>成功ラウンド</dt>
+            <dd id="score-output">0</dd>
+          </div>
+        </dl>
+
+        <!-- 図形と名前を色と一緒に表示し、色だけに頼らずパッドを識別します。 -->
+        <div class="simon-pads" role="group" aria-label="順番を入力する4つのパッド">
+          <button class="simon-pad simon-pad--red" type="button" data-pad="red" aria-label="赤・丸のパッド">
+            <span class="simon-pad__symbol" aria-hidden="true">●</span>
+            <span>赤・丸</span>
+          </button>
+          <button class="simon-pad simon-pad--blue" type="button" data-pad="blue" aria-label="青・三角のパッド">
+            <span class="simon-pad__symbol" aria-hidden="true">▲</span>
+            <span>青・三角</span>
+          </button>
+          <button class="simon-pad simon-pad--yellow" type="button" data-pad="yellow" aria-label="黄・四角のパッド">
+            <span class="simon-pad__symbol" aria-hidden="true">■</span>
+            <span>黄・四角</span>
+          </button>
+          <button class="simon-pad simon-pad--green" type="button" data-pad="green" aria-label="緑・星のパッド">
+            <span class="simon-pad__symbol" aria-hidden="true">★</span>
+            <span>緑・星</span>
+          </button>
+        </div>
+
+        <div class="simon-actions" role="group" aria-label="ゲーム設定">
+          <button id="start-button" class="simon-button simon-button--primary" type="button">スタート</button>
+          <button id="reset-button" class="simon-button" type="button">最初から遊ぶ</button>
+          <button id="mute-button" class="simon-button" type="button" aria-pressed="false">消音：オフ</button>
+        </div>
+
+        <p class="simon-help" id="control-help">
+          キーボードでは1〜4キー、または画面のパッドを使います。音はスタート後に再生されます。音を消しても画面表示で遊べます。
+        </p>
+        <p id="audio-notice" class="simon-audio-notice"></p>
+        <p id="game-feedback" class="simon-feedback" role="status" aria-live="polite" aria-atomic="true">
+          スタートを押してください。音の順番を覚えて、同じ順に選びましょう。
+        </p>
+      </section>
+
+      <footer class="site-footer">
+        <p>順番を間違えるまでラウンドを続け、成功した回数を記録します。</p>
+      </footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
