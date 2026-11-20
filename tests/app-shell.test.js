@@ -231,3 +231,13 @@ test("Minesweeper page exposes its board and accessible input modes", () => {
   assert.match(minesweeperStyles, /@media \(max-width: 520px\)/);
   assert.match(minesweeperStyles, /touch-action: manipulation/);
 });
+
+test("開いたセルと旗セルには未開封セル用のhover色を適用しない", () => {
+  // 開いた直後も数字が読めるように、hover背景を閉じたセルにだけ限定します。
+  assert.match(
+    minesweeperStyles,
+    /\.minesweeper-cell:not\(\.minesweeper-cell--revealed\):not\(\.minesweeper-cell--flagged\):hover:not\(:disabled\)\s*\{\s*background: #435273;/,
+  );
+  assert.doesNotMatch(minesweeperStyles, /\.minesweeper-cell:hover:not\(:disabled\)\s*\{/);
+  assert.match(minesweeperStyles, /\.minesweeper-cell--revealed\s*\{[^}]*background: #f0f3fa;/s);
+});
