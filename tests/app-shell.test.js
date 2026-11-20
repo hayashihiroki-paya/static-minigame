@@ -27,6 +27,10 @@ const lightsOutSourcePage = await readFile(
   new URL("../src/games/lights-out/index.html", import.meta.url),
   "utf8",
 );
+const breakoutPage = await readFile(
+  new URL("../src/games/breakout/index.html", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -88,6 +92,12 @@ test("home page links to the built lights-out game", () => {
   assert.match(page, /ライツアウト/);
 });
 
+test("home page links to the Canvas breakout game", () => {
+  // 新しいゲームも一覧から直接開けるように、静的なゲームページへのリンクを確認します。
+  assert.match(page, /href="\.\/src\/games\/breakout\/"/);
+  assert.match(page, /ブロック崩し/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -135,4 +145,16 @@ test("lights-out source page loads the TypeScript entry and names the game contr
   assert.match(lightsOutSourcePage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
   assert.match(lightsOutSourcePage, /id="reset-button"[^>]*type="button"/);
   assert.match(lightsOutSourcePage, /<script type="module" src="\.\/main\.ts"><\/script>/);
+});
+
+test("breakout page exposes a labeled canvas, keyboard help and accessible controls", () => {
+  // Canvasの状態を外側のテキストでも伝え、標準ボタンでタッチとキーボードを操作できます。
+  assert.match(breakoutPage, /<html lang="ja">/);
+  assert.match(breakoutPage, /<canvas[^>]*aria-label="ブロック崩しのゲーム画面"/);
+  assert.match(breakoutPage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(breakoutPage, /id="move-left"[^>]*data-direction="left"/);
+  assert.match(breakoutPage, /id="move-right"[^>]*data-direction="right"/);
+  assert.match(breakoutPage, /id="launch-button"[^>]*type="button"/);
+  assert.match(breakoutPage, /id="reset-button"[^>]*type="button"/);
+  assert.match(breakoutPage, /<script type="module" src="\.\/main\.js"><\/script>/);
 });
