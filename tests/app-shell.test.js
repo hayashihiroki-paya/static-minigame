@@ -31,6 +31,8 @@ const breakoutPage = await readFile(
   new URL("../src/games/breakout/index.html", import.meta.url),
   "utf8",
 );
+const snakePage = await readFile(new URL("../src/games/snake/index.html", import.meta.url), "utf8");
+const snakeApp = await readFile(new URL("../src/games/snake/SnakeApp.svelte", import.meta.url), "utf8");
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -98,6 +100,12 @@ test("home page links to the Canvas breakout game", () => {
   assert.match(page, /ブロック崩し/);
 });
 
+test("home page links to the built Svelte snake game", () => {
+  // Svelteは静的出力を必要とするため、ホームからビルド済みのゲームを開きます。
+  assert.match(page, /href="\.\/dist\/games\/snake\/"/);
+  assert.match(page, /スネーク/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -157,4 +165,14 @@ test("breakout page exposes a labeled canvas, keyboard help and accessible contr
   assert.match(breakoutPage, /id="launch-button"[^>]*type="button"/);
   assert.match(breakoutPage, /id="reset-button"[^>]*type="button"/);
   assert.match(breakoutPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("snake page loads the Svelte entry and offers keyboard and touch controls", () => {
+  // Svelteの入口、状態通知、開始と方向操作のボタンをソース画面で確認します。
+  assert.match(snakePage, /<html lang="ja">/);
+  assert.match(snakePage, /<script type="module" src="\.\/main\.js"><\/script>/);
+  assert.match(snakeApp, /role="status" aria-live="polite"/);
+  assert.match(snakeApp, /矢印キーまたはW・A・S・D/);
+  assert.match(snakeApp, /aria-label="上へ"/);
+  assert.match(snakeApp, /onclick=\{beginGame\}/);
 });
