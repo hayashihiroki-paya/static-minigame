@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="マスを押して上下左右のライトを反転させ、盤面をすべて消灯するライツアウトゲームです。"
+    />
+    <!-- 共通デザインを使いながら、画面専用のスタイルを分けてほかのゲームに影響させません。 -->
+    <title>ライツアウト | ミニゲーム集</title>
+    <script type="module" crossorigin src="./assets/index.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index.css">
+  </head>
+  <body>
+    <!-- ゲーム一覧への導線、盤面、状態通知、リセットを一つのmainにまとめます。 -->
+    <main class="page-shell lights-out-page">
+      <header class="lights-out-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>ライツアウト</h1>
+        <p class="lead">マスを押して、盤面のライトをすべて消そう。</p>
+      </header>
+
+      <section class="lights-out-card" aria-labelledby="board-heading">
+        <h2 id="board-heading">ライトの盤面</h2>
+
+        <!-- TypeScriptで25個のbuttonを作り、位置と点灯状態を読み上げ名にも反映します。 -->
+        <div id="lights-out-board" class="lights-out-board" role="group" aria-label="ライツアウトの盤面"></div>
+
+        <!-- 点灯数とクリア結果をライブ領域で知らせ、操作の結果をすぐ確認できるようにします。 -->
+        <p id="game-feedback" class="game-feedback" role="status" aria-live="polite" aria-atomic="true">
+          盤面を読み込み中です。
+        </p>
+
+        <button id="reset-button" class="reset-button" type="button">最初から遊ぶ</button>
+      </section>
+
+      <footer class="site-footer">
+        <p>選んだマスと上下左右のマスが同時に反転します。</p>
+      </footer>
+    </main>
+
+    <!-- ViteがTypeScriptをブラウザーで実行できる静的ファイルへ変換します。 -->
+  </body>
+</html>

@@ -1,0 +1,119 @@
+/* ライツアウトだけにスタイルを適用し、既存のゲーム画面には影響させません。 */
+.lights-out-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+/* 戻る導線をほかのゲームと揃え、一覧へ戻る方法を見つけやすくします。 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.back-link:focus-visible,
+.lights-out-cell:focus-visible,
+.reset-button:focus-visible {
+  outline: 3px solid #5369c8;
+  outline-offset: 3px;
+}
+
+/* 盤面と状態表示をカードにまとめ、狭い画面ではカード幅を画面に合わせます。 */
+.lights-out-card {
+  width: min(100%, 42rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.lights-out-card h2 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+
+/* 5列を固定し、均等な間隔で25個のマスを並べます。 */
+.lights-out-board {
+  display: grid;
+  width: min(100%, 34rem);
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(0.3rem, 1.6vw, 0.7rem);
+  margin: 0 auto;
+}
+
+/* 大きな正方形のbuttonにして、指でもキーボードでもマスを選びやすくします。 */
+.lights-out-cell {
+  display: grid;
+  min-width: 0;
+  min-height: 3rem;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #cfd7eb;
+  border-radius: 0.85rem;
+  background: #eef0ff;
+  color: #5360b9;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(1.5rem, 7vw, 2.8rem);
+  line-height: 1;
+  touch-action: manipulation;
+}
+
+.lights-out-cell:hover {
+  border-color: #7180d2;
+  background: #e4e8ff;
+}
+
+.lights-out-cell.is-lit {
+  border-color: #e7c475;
+  background: #fff5dc;
+  color: #945b00;
+}
+
+/* 状態文の高さを保ち、点灯数が変わっても盤面が大きく動かないようにします。 */
+.game-feedback {
+  min-height: 3.5rem;
+  margin: 1.25rem 0 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* リセットも標準buttonで提供し、キーボードとタッチの両方に対応します。 */
+.reset-button {
+  min-height: 2.9rem;
+  margin-top: 0.25rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #edf0f8;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.reset-button:hover {
+  background: #e3e8f4;
+}
+
+@media (max-width: 420px) {
+  .lights-out-card {
+    padding: 0.75rem;
+  }
+
+  .lights-out-cell {
+    border-radius: 0.6rem;
+    font-size: clamp(1.35rem, 7vw, 2rem);
+  }
+}
