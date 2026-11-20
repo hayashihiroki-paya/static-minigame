@@ -1,4 +1,5 @@
 /* この画面専用のクラスで、ほかのゲームの見た目に影響させません。 */
+/* 見出しとカードの幅を揃え、盤面へ視線を集めます。 */
 .minesweeper-header {
   margin: 0 auto 2rem;
   text-align: center;
@@ -36,6 +37,7 @@
   text-align: center;
 }
 
+/* 操作モードは小さい画面で折り返し、選択中はボタンの状態でも示します。 */
 .minesweeper-modes {
   display: flex;
   flex-wrap: wrap;
@@ -88,6 +90,7 @@
   text-align: center;
 }
 
+/* 盤面の外枠に余白を持たせ、81個のセルを1つの操作領域として見せます。 */
 .minesweeper-board {
   display: grid;
   gap: 0.22rem;
@@ -98,6 +101,7 @@
   background: #cbd3e8;
 }
 
+/* 各行を9等分し、画面幅に合わせてもセルの縦横比を保ちます。 */
 .minesweeper-board [role="row"] {
   display: grid;
   grid-template-columns: repeat(9, minmax(0, 1fr));
@@ -108,6 +112,7 @@
   min-width: 0;
 }
 
+/* 閉じたセルは盛り上がった色にし、開閉状態を文字と色の両方で区別します。 */
 .minesweeper-cell {
   display: grid;
   width: 100%;
@@ -130,6 +135,7 @@
   background: #435273;
 }
 
+/* 開いたマス・旗・地雷は状態ごとに面色を変え、数字の色は隣接数で変えます。 */
 .minesweeper-cell--revealed {
   border-color: #d4dbea;
   background: #f0f3fa;
@@ -168,6 +174,7 @@
   color: #6f3d92;
 }
 
+/* キーボードフォーカスを枠で示し、隣のセルとの位置を見失わないようにします。 */
 .minesweeper-cell:focus-visible {
   z-index: 1;
   outline: 3px solid #df7c16;
@@ -178,6 +185,7 @@
   cursor: default;
 }
 
+/* 操作と勝敗の文章を独立した領域に置き、読みやすい行間を確保します。 */
 .minesweeper-feedback {
   min-height: 3.3rem;
   margin: 0.9rem 0 0;
@@ -190,6 +198,7 @@
   text-align: center;
 }
 
+/* 狭い画面ではカードの余白とセル間隔を詰め、9列の盤面を画面内に収めます。 */
 @media (max-width: 520px) {
   .minesweeper-card {
     padding: 0.65rem;
