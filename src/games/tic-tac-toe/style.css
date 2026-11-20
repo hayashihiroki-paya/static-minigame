@@ -1,0 +1,147 @@
+/* マルバツゲームだけにスタイルを適用し、ほかのページへの影響を防ぎます。 */
+.tic-tac-toe-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+/* 戻る導線をほかのゲームと同じ見た目にして、一覧へ戻る方法を見つけやすくします。 */
+.back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.back-link:focus-visible,
+.board-cell:focus-visible,
+.reset-button:focus-visible {
+  outline: 3px solid #5369c8;
+  outline-offset: 3px;
+}
+
+/* 盤面と結果をカードにまとめ、狭い画面でも中央で読める幅にします。 */
+.tic-tac-toe-card {
+  width: min(100%, 36rem);
+  margin: 0 auto;
+  padding: clamp(1rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.tic-tac-toe-card h2 {
+  margin-bottom: 0.75rem;
+  font-size: 1.25rem;
+}
+
+.turn-indicator {
+  display: flex;
+  min-height: 3rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0 0 1rem;
+  color: #566176;
+  font-weight: 700;
+}
+
+.turn-indicator strong {
+  display: grid;
+  width: 2.5rem;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 0.75rem;
+  background: #eef0ff;
+  color: #3649a5;
+  font-size: 1.4rem;
+}
+
+/* 3列の盤面を画面幅に合わせ、余白を残しながら常に正方形で保ちます。 */
+.tic-tac-toe-board {
+  display: grid;
+  width: min(100%, 27rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.35rem, 2vw, 0.75rem);
+  margin: 0 auto;
+}
+
+/* マスを標準buttonにすることで、マウス・タッチ・TabとEnter/Spaceで選べます。 */
+.board-cell {
+  display: grid;
+  min-width: 0;
+  min-height: 4rem;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #cfd7eb;
+  border-radius: 1rem;
+  background: #f7f8ff;
+  color: #3649a5;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(2rem, 12vw, 4.5rem);
+  font-weight: 800;
+  line-height: 1;
+  touch-action: manipulation;
+}
+
+.board-cell:hover {
+  border-color: #7180d2;
+  background: #eef0ff;
+}
+
+.board-cell.is-marked {
+  background: #fff;
+  cursor: default;
+}
+
+.board-cell.is-winning {
+  border-color: #81b99a;
+  background: #eaf7ef;
+  color: #245c3b;
+}
+
+/* 状態通知に最低限の高さを保ち、勝敗文で盤面が大きく動かないようにします。 */
+.game-feedback {
+  min-height: 3.5rem;
+  margin: 1.25rem 0 1rem;
+  padding: 0.85rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* リセットも標準buttonにして、キーボードとタッチのどちらでも使えるようにします。 */
+.reset-button {
+  min-height: 2.9rem;
+  margin-top: 0.25rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #edf0f8;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.reset-button:hover {
+  background: #e3e8f4;
+}
+
+@media (max-width: 420px) {
+  .tic-tac-toe-card {
+    padding: 0.85rem;
+  }
+
+  .board-cell {
+    border-radius: 0.7rem;
+    font-size: clamp(2rem, 17vw, 3.5rem);
+  }
+}
