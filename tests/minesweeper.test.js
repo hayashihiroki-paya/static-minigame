@@ -1,3 +1,4 @@
+// 固定盤面と固定乱数で、ゲームルールの境界・状態遷移を再現して確認します。
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import {
@@ -9,6 +10,7 @@ import {
   toggleFlag,
 } from "../src/games/minesweeper/logic.js";
 
+// 角と中央に地雷を置いたfixtureにし、盤面境界と複数の探索範囲を試します。
 const FIXTURE_MINES = [
   [0, 0], [0, 1], [0, 2],
   [1, 0], [1, 2],
@@ -16,6 +18,11 @@ const FIXTURE_MINES = [
   [4, 4], [4, 5],
 ];
 
+/**
+ * 任意の地雷位置からルールテスト用の開始盤面を作ります。
+ * @param {Array<[number, number]>} positions 0始まりの地雷座標
+ * @returns {object} 隣接数を計算済みのプレイ中状態
+ */
 function createGameWithMines(positions = FIXTURE_MINES) {
   const initial = createInitialGame();
   const board = initial.board.map((row) => row.map((cell) => ({ ...cell })));
@@ -28,6 +35,7 @@ function createGameWithMines(positions = FIXTURE_MINES) {
   return { ...initial, board, initialized: true, status: "playing" };
 }
 
+// 遅延初期化を確認し、初手安全を設ける盤面生成の前提を守ります。
 test("開始前は9×9の未開封盤面を作り、地雷配置をまだ決めない", () => {
   const game = createInitialGame();
   assert.equal(game.board.length, BOARD_SIZE);
@@ -37,6 +45,7 @@ test("開始前は9×9の未開封盤面を作り、地雷配置をまだ決め�
   assert.equal(game.status, "ready");
 });
 
+// 乱数注入と地雷数・隣接数をまとめて確認し、生成処理を再現可能にします。
 test("最初に開いた場所を避けて地雷を10個配置し、隣接数を計算する", () => {
   const game = createInitialGame();
   const started = revealCell(game, 4, 4, () => 0.5);
@@ -53,6 +62,7 @@ test("最初に開いた場所を避けて地雷を10個配置し、隣接数を
   }
 });
 
+// 初手前の旗操作も維持され、旗があるマスは開けないことを確認します。
 test("旗を付けたマスは最初に開かず、旗を外すと操作できる", () => {
   const game = createInitialGame();
   const flagged = toggleFlag(game, 4, 4);
@@ -65,6 +75,7 @@ test("旗を付けたマスは最初に開かず、旗を外すと操作でき�
   assert.equal(revealCell(unflagged, 4, 4, () => 0.5).initialized, true);
 });
 
+// 無効な入力では同じ状態が返り、元の盤面が変更されないことを確認します。
 test("旗や開いたマスは変更せず、無効な座標も無視する", () => {
   const game = createGameWithMines();
   const opened = revealCell(game, 8, 8);
@@ -73,11 +84,13 @@ test("旗や開いたマスは変更せず、無効な座標も無視する", ()
   assert.equal(revealCell(game, BOARD_SIZE, 0), game);
 });
 
+// Fisher–Yates法へ不正な乱数を渡したときに盤面生成を止める契約を確認します。
 test("乱数が0以上1未満でなければ盤面を生成しない", () => {
   assert.throws(() => revealCell(createInitialGame(), 0, 0, () => 1), RangeError);
   assert.throws(() => revealCell(createInitialGame(), 0, 0, () => Number.NaN), RangeError);
 });
 
+// 角・反対側の角・盤面外で8方向の境界計算を確認します。
 test("隣接地雷数は角の範囲で正しく数え、盤面外へは回り込まない", () => {
   const game = createGameWithMines();
   assert.equal(countAdjacentMines(game.board, 0, 0), 2);
@@ -85,6 +98,7 @@ test("隣接地雷数は角の範囲で正しく数え、盤面外へは回り�
   assert.equal(countAdjacentMines(game.board, -1, 0), 0);
 });
 
+// 幅優先探索が数字まで開き、旗と地雷を飛ばす境界条件を確認します。
 test("空白を開くとFlood Fillが数字の境界まで広がり、旗と地雷を開かない", () => {
   const game = createGameWithMines();
   const board = game.board.map((row) => row.map((cell) => ({ ...cell })));
@@ -102,6 +116,7 @@ test("空白を開くとFlood Fillが数字の境界まで広がり、旗と地�
   assert.equal(next.status, "playing");
 });
 
+// 最後の安全マスでだけ勝利になり、終端状態が固定されることを確認します。
 test("安全なマスを最後まで開くとクリアし、その後の入力を無視する", () => {
   const game = createGameWithMines();
   const board = game.board.map((row) =>
@@ -124,6 +139,7 @@ test("安全なマスを最後まで開くとクリアし、その後の入力�
   assert.equal(toggleFlag(won, 8, 8), won);
 });
 
+// 地雷で敗北し、ゲーム終了後に再開や旗操作が反映されないことを確認します。
 test("地雷を開くとゲームオーバーになり、終了後の操作を無視する", () => {
   const game = createGameWithMines();
   const lost = revealCell(game, 0, 0);
