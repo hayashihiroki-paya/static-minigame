@@ -33,6 +33,8 @@ const breakoutPage = await readFile(
 );
 const snakePage = await readFile(new URL("../src/games/snake/index.html", import.meta.url), "utf8");
 const snakeApp = await readFile(new URL("../src/games/snake/SnakeApp.svelte", import.meta.url), "utf8");
+const simonPage = await readFile(new URL("../src/games/simon/index.html", import.meta.url), "utf8");
+const simonStyles = await readFile(new URL("../src/games/simon/style.css", import.meta.url), "utf8");
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -106,6 +108,12 @@ test("home page links to the built Svelte snake game", () => {
   assert.match(page, /スネーク/);
 });
 
+test("home page links to the Simon game", () => {
+  // 新しいゲームを一覧に追加し、既存の静的なソースページへ案内します。
+  assert.match(page, /href="\.\/src\/games\/simon\/"/);
+  assert.match(page, /サイモンゲーム/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -175,4 +183,18 @@ test("snake page loads the Svelte entry and offers keyboard and touch controls",
   assert.match(snakeApp, /矢印キーまたはW・A・S・D/);
   assert.match(snakeApp, /aria-label="上へ"/);
   assert.match(snakeApp, /onclick=\{beginGame\}/);
+});
+
+test("Simon page has named pads, audio controls and a local JavaScript entry", () => {
+  // 色だけに頼らないパッド名、消音、状態通知、入力説明をページ構造から確認します。
+  assert.match(simonPage, /<html lang="ja">/);
+  assert.match(simonPage, /data-pad="red" aria-label="赤・丸のパッド"/);
+  assert.match(simonPage, /data-pad="blue" aria-label="青・三角のパッド"/);
+  assert.doesNotMatch(simonPage, /data-pad="(?:red|blue|yellow|green)"[^>]*aria-pressed/);
+  assert.match(simonPage, /id="mute-button"[^>]*aria-pressed="false"/);
+  assert.match(simonPage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(simonPage, /キーボードでは1〜4キー/);
+  assert.match(simonPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+  assert.match(simonStyles, /@media \(max-width: 520px\)/);
+  assert.match(simonStyles, /touch-action: manipulation/);
 });
