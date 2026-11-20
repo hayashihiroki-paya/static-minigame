@@ -131,7 +131,8 @@
   touch-action: manipulation;
 }
 
-.minesweeper-cell:hover:not(:disabled) {
+/* 閉じたセルだけにhover色を付け、開いた直後に数字マスの背景が隠れないようにします。 */
+.minesweeper-cell:not(.minesweeper-cell--revealed):not(.minesweeper-cell--flagged):hover:not(:disabled) {
   background: #435273;
 }
 
