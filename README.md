@@ -15,7 +15,11 @@
 
     npm run build
 
-生成物は `dist/games/lights-out/` に置き、ホーム画面から静的ファイルとして開きます。ライツアウト以外のゲームは引き続きソースを直接配信します。
+Svelteを使ったスネークをブラウザー向けの静的ファイルへ変換する場合は、次を実行します。
+
+    npm run build:snake
+
+生成物はそれぞれ `dist/games/lights-out/` と `dist/games/snake/` に置き、ホーム画面から開きます。ほかのゲームは引き続きソースを直接配信します。
 
 ブラウザーでの確認は、リポジトリのルートでローカルHTTPサーバーを起動します。
 
@@ -29,7 +33,7 @@ Pull Requestにする前に、次のコマンドを実行します。
 
     npm run check
 
-このコマンドはJavaScriptの構文、TypeScriptの型検査、自動テストを確認します。ライツアウトの静的ビルドは `npm run build` で確認し、同じチェックとビルドをGitHub Actionsでも実行します。ビルド工程はライツアウトだけに使います。
+このコマンドはJavaScriptの構文、TypeScriptの型検査、自動テストを確認します。静的ビルドは `npm run build` と `npm run build:snake` で確認し、GitHub Actionsでも両方を実行します。
 
 ## GitHubの初回設定
 

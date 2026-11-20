@@ -5,4 +5,7 @@ dist/games/*
 !dist/games/lights-out/
 dist/games/lights-out/*
 !dist/games/lights-out/**
+!dist/games/snake/
+dist/games/snake/*
+!dist/games/snake/**
 .DS_Store
