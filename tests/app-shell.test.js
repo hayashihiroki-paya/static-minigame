@@ -15,6 +15,10 @@ const rockPaperScissorsPage = await readFile(
   new URL("../src/games/rock-paper-scissors/index.html", import.meta.url),
   "utf8",
 );
+const memoryMatchPage = await readFile(
+  new URL("../src/games/memory-match/index.html", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -58,6 +62,12 @@ test("home page links to the rock paper scissors game", () => {
   assert.match(page, /じゃんけん/);
 });
 
+test("home page links to the memory match game", () => {
+  // 追加したゲームを一覧から開けることと、リンク名が日本語で読めることを確認します。
+  assert.match(page, /href="\.\/src\/games\/memory-match\/"/);
+  assert.match(page, /神経衰弱/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -78,4 +88,13 @@ test("rock paper scissors page has accessible hand buttons and live results", ()
   assert.match(rockPaperScissorsPage, /data-hand="paper" aria-label="パーを出す"/);
   assert.match(rockPaperScissorsPage, /role="status" aria-live="polite" aria-atomic="true"/);
   assert.match(rockPaperScissorsPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("memory match page has a named card board, live status and reset control", () => {
+  // カード状態を伝える盤面と進行状況を読み上げ、リセットにも標準button操作を使います。
+  assert.match(memoryMatchPage, /<html lang="ja">/);
+  assert.match(memoryMatchPage, /id="card-grid"[^>]*aria-label="神経衰弱のカード"/);
+  assert.match(memoryMatchPage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(memoryMatchPage, /id="reset-button"[^>]*type="button"/);
+  assert.match(memoryMatchPage, /<script type="module" src="\.\/main\.js"><\/script>/);
 });

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="16枚のカードから同じ絵柄のペアを探す神経衰弱ゲームです。"
+    />
+    <!-- 共通スタイルと専用スタイルを読み込み、他ゲームの表示を変えずにカード盤面を整えます。 -->
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>神経衰弱 | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- 遊び方、盤面、進行状況、リセットをmainにまとめてゲームの流れを追いやすくします。 -->
+    <main class="page-shell memory-match-page">
+      <header class="memory-match-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>神経衰弱</h1>
+        <p class="lead">カードを2枚めくり、同じ絵柄のペアを探してください。</p>
+      </header>
+
+      <section class="memory-match-card" aria-labelledby="board-heading">
+        <h2 id="board-heading">カードを選ぶ</h2>
+
+        <!-- JavaScriptで16個のbuttonを作り、盤面位置ごとに操作と読み上げ名を結びます。 -->
+        <div id="card-grid" class="card-grid" role="group" aria-label="神経衰弱のカード"></div>
+
+        <!-- 結果や次の操作を通知し、絵柄だけを頼りにしなくても進めるようにします。 -->
+        <p id="game-feedback" class="game-feedback" role="status" aria-live="polite" aria-atomic="true">
+          カードを2枚選んで、絵柄のペアを探してください。
+        </p>
+
+        <dl class="game-progress" aria-live="polite" aria-atomic="true">
+          <div>
+            <dt>手数</dt>
+            <dd id="moves-count">0</dd>
+          </div>
+          <div>
+            <dt>そろったペア</dt>
+            <dd id="pairs-count">0 / 8</dd>
+          </div>
+        </dl>
+
+        <button id="reset-button" class="reset-button" type="button">最初から遊ぶ</button>
+      </section>
+
+      <footer class="site-footer">
+        <p>カードの状態と絵柄の一致を比べるゲームです。</p>
+      </footer>
+    </main>
+
+    <!-- ゲーム専用のモジュールだけを読み込み、他ページの状態と混ざらないようにします。 -->
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
