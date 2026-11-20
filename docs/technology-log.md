@@ -17,8 +17,7 @@
 | [ライツアウト](../src/games/lights-out/) | 意図的な技術試行 | TypeScriptとVite。型検査とブラウザー向けビルドを行い、生成物を静的ファイルとして配信する。 | 型で盤面状態を表し、ビルド時の変換と実行時の静的配信を分けた。 | [#16](https://github.com/hayashihiroki-paya/static-minigame/issues/16) |
 | [ブロック崩し](../src/games/breakout/) | 意図的な技術試行 | Canvas 2D APIとrequestAnimationFrame。固定時間刻みで状態を進め、衝突ルールを描画処理から分ける。 | Canvas座標での描画、フレーム更新、衝突判定を試し、時間と入力を固定したロジックテストを用意した。 | [#20](https://github.com/hayashihiroki-paya/static-minigame/issues/20) |
 
-| [スネーク](../src/games/snake/) | 意図的な技術試行 | Svelte 5とVite。`$state`・`$derived`で盤面と表示を同期し、ゲームルールは通常のJavaScriptモジュールへ分ける。 |
-| 学習・結果 | Svelteのリアクティブな状態管理とコンポーネントを試しつつ、ルールをUIから独立させてNode.jsの組み込みテストで決定的に確認できた。静的ビルドで配信するための構成も記録した。 | [#24](https://github.com/hayashihiroki-paya/static-minigame/issues/24) |
+| [スネーク](../src/games/snake/) | 意図的な技術試行 | Svelte 5とVite。\`$state\`・\`$derived\`で盤面と表示を同期し、ゲームルールは通常のJavaScriptモジュールへ分ける。 | Svelteのリアクティブな状態管理とコンポーネントを試しつつ、ルールをUIから独立させてNode.jsの組み込みテストで決定的に確認できた。静的ビルドで配信するための構成も記録した。 | [#24](https://github.com/hayashihiroki-paya/static-minigame/issues/24) |
 
 | [サイモンゲーム](../src/games/simon/) | 意図的な技術試行 | Web Audio API。AudioContext、OscillatorNode、GainNodeで短い音を合成し、音声処理をルールから分ける。 | AudioContextをユーザー操作後に開始する制約、音の合成と停止、消音・非対応時の扱いを試した。ゲームルールはNode.jsでテストし、音声APIがなくても視覚操作で遊べるようにした。 | [#26](https://github.com/hayashihiroki-paya/static-minigame/issues/26) |
 ## 今後の更新方法
