@@ -19,6 +19,10 @@ const memoryMatchPage = await readFile(
   new URL("../src/games/memory-match/index.html", import.meta.url),
   "utf8",
 );
+const ticTacToePage = await readFile(
+  new URL("../src/games/tic-tac-toe/index.html", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -68,6 +72,12 @@ test("home page links to the memory match game", () => {
   assert.match(page, /神経衰弱/);
 });
 
+test("home page links to the tic-tac-toe game", () => {
+  // マルバツゲームを一覧から開けることを、日本語名と相対リンクで確認します。
+  assert.match(page, /href="\.\/src\/games\/tic-tac-toe\/"/);
+  assert.match(page, /マルバツゲーム/);
+});
+
 test("number guessing page connects its input to an accessible label", () => {
   // labelとinputのIDを結び、見た目だけでなく読み上げ環境でも入力目的を伝えます。
   assert.match(numberGuessPage, /<label for="guess-input">予想する数字<\/label>/);
@@ -97,4 +107,13 @@ test("memory match page has a named card board, live status and reset control", 
   assert.match(memoryMatchPage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
   assert.match(memoryMatchPage, /id="reset-button"[^>]*type="button"/);
   assert.match(memoryMatchPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("tic-tac-toe page has a named board, live status and reset control", () => {
+  // 9個の操作ボタンをまとめる盤面と、手番通知・リセット操作があることを確認します。
+  assert.match(ticTacToePage, /<html lang="ja">/);
+  assert.match(ticTacToePage, /id="tic-tac-toe-board"[^>]*aria-label="マルバツゲームの盤面"/);
+  assert.match(ticTacToePage, /id="game-feedback"[^>]*role="status"[^>]*aria-live="polite"/);
+  assert.match(ticTacToePage, /id="reset-button"[^>]*type="button"/);
+  assert.match(ticTacToePage, /<script type="module" src="\.\/main\.js"><\/script>/);
 });
