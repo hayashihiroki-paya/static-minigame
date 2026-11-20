@@ -28,3 +28,5 @@ jobs:
         run: npm run check
       - name: ライツアウトの静的ファイルをビルド
         run: npm run build
+      - name: スネークの静的ファイルをビルド
+        run: npm run build:snake
