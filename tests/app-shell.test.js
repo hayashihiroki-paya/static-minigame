@@ -35,6 +35,18 @@ const snakePage = await readFile(new URL("../src/games/snake/index.html", import
 const snakeApp = await readFile(new URL("../src/games/snake/SnakeApp.svelte", import.meta.url), "utf8");
 const simonPage = await readFile(new URL("../src/games/simon/index.html", import.meta.url), "utf8");
 const simonStyles = await readFile(new URL("../src/games/simon/style.css", import.meta.url), "utf8");
+const minesweeperPage = await readFile(
+  new URL("../src/games/minesweeper/index.html", import.meta.url),
+  "utf8",
+);
+const minesweeperMain = await readFile(
+  new URL("../src/games/minesweeper/main.js", import.meta.url),
+  "utf8",
+);
+const minesweeperStyles = await readFile(
+  new URL("../src/games/minesweeper/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -112,6 +124,12 @@ test("home page links to the Simon game", () => {
   // 新しいゲームを一覧に追加し、既存の静的なソースページへ案内します。
   assert.match(page, /href="\.\/src\/games\/simon\/"/);
   assert.match(page, /サイモンゲーム/);
+});
+
+test("home page links to the Minesweeper game", () => {
+  // 追加したマインスイーパーを静的なゲームページへの相対リンクで案内します。
+  assert.match(page, /href="\.\/src\/games\/minesweeper\/"/);
+  assert.match(page, /マインスイーパー/);
 });
 
 test("number guessing page connects its input to an accessible label", () => {
@@ -197,4 +215,19 @@ test("Simon page has named pads, audio controls and a local JavaScript entry", (
   assert.match(simonPage, /<script type="module" src="\.\/main\.js"><\/script>/);
   assert.match(simonStyles, /@media \(max-width: 520px\)/);
   assert.match(simonStyles, /touch-action: manipulation/);
+});
+
+test("Minesweeper page exposes its board and accessible input modes", () => {
+  // 標準ボタンの開く・旗モードとライブ通知を用意し、盤面をキーボードでも移動できます。
+  assert.match(minesweeperPage, /<html lang="ja">/);
+  assert.match(minesweeperPage, /id="reveal-mode-button"[^>]*aria-pressed="true"/);
+  assert.match(minesweeperPage, /id="flag-mode-button"[^>]*aria-pressed="false"/);
+  assert.match(minesweeperPage, /role="grid"/);
+  assert.match(minesweeperPage, /role="status" aria-live="polite"/);
+  assert.match(minesweeperPage, /タブでマスを選び|マスを選んでEnter/);
+  assert.match(minesweeperPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+  assert.match(minesweeperMain, /ArrowRight/);
+  assert.match(minesweeperStyles, /grid-template-columns: repeat\(9, minmax\(0, 1fr\)\)/);
+  assert.match(minesweeperStyles, /@media \(max-width: 520px\)/);
+  assert.match(minesweeperStyles, /touch-action: manipulation/);
 });
