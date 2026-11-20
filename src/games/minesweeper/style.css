@@ -1,0 +1,215 @@
+/* この画面専用のクラスで、ほかのゲームの見た目に影響させません。 */
+.minesweeper-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.minesweeper-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.minesweeper-card {
+  width: min(100%, 37rem);
+  margin: 0 auto;
+  padding: clamp(0.85rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.minesweeper-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.minesweeper-progress {
+  margin: 0;
+  color: #263a91;
+  font-size: 1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+.minesweeper-modes {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.55rem;
+  margin: 0.9rem 0;
+}
+
+.minesweeper-button {
+  min-height: 2.8rem;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.75rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.minesweeper-button--selected {
+  border-color: #3649a5;
+  background: #e8ecff;
+  color: #263a91;
+  box-shadow: inset 0 0 0 1px #3649a5;
+}
+
+.minesweeper-button--primary {
+  border-color: #3649a5;
+  background: #4357b6;
+  color: #fff;
+}
+
+.minesweeper-button:hover {
+  filter: brightness(0.97);
+}
+
+.minesweeper-button:focus-visible,
+.minesweeper-page .back-link:focus-visible {
+  outline: 3px solid #263a91;
+  outline-offset: 3px;
+}
+
+.minesweeper-help {
+  margin: 0.75rem auto 0.9rem;
+  color: #566176;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.minesweeper-board {
+  display: grid;
+  gap: 0.22rem;
+  width: min(100%, 32rem);
+  margin: 0 auto;
+  padding: 0.45rem;
+  border-radius: 0.85rem;
+  background: #cbd3e8;
+}
+
+.minesweeper-board [role="row"] {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+  gap: 0.22rem;
+}
+
+.minesweeper-board [role="gridcell"] {
+  min-width: 0;
+}
+
+.minesweeper-cell {
+  display: grid;
+  width: 100%;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #8995b1;
+  border-radius: 0.28rem;
+  background: #566688;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(0.72rem, 4vw, 1.05rem);
+  font-weight: 900;
+  line-height: 1;
+  touch-action: manipulation;
+}
+
+.minesweeper-cell:hover:not(:disabled) {
+  background: #435273;
+}
+
+.minesweeper-cell--revealed {
+  border-color: #d4dbea;
+  background: #f0f3fa;
+  color: #566176;
+  cursor: default;
+}
+
+.minesweeper-cell--flagged {
+  background: #72508f;
+  color: #fff;
+}
+
+.minesweeper-cell--mine {
+  border-color: #a63242;
+  background: #c83d4e;
+  color: #fff;
+}
+
+.minesweeper-cell[data-number="1"] {
+  color: #2459a8;
+}
+
+.minesweeper-cell[data-number="2"] {
+  color: #24744b;
+}
+
+.minesweeper-cell[data-number="3"] {
+  color: #b03543;
+}
+
+.minesweeper-cell[data-number="4"],
+.minesweeper-cell[data-number="5"],
+.minesweeper-cell[data-number="6"],
+.minesweeper-cell[data-number="7"],
+.minesweeper-cell[data-number="8"] {
+  color: #6f3d92;
+}
+
+.minesweeper-cell:focus-visible {
+  z-index: 1;
+  outline: 3px solid #df7c16;
+  outline-offset: 1px;
+}
+
+.minesweeper-cell:disabled {
+  cursor: default;
+}
+
+.minesweeper-feedback {
+  min-height: 3.3rem;
+  margin: 0.9rem 0 0;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .minesweeper-card {
+    padding: 0.65rem;
+  }
+
+  .minesweeper-board,
+  .minesweeper-board [role="row"] {
+    gap: 0.14rem;
+  }
+
+  .minesweeper-board {
+    padding: 0.3rem;
+  }
+
+  .minesweeper-modes {
+    gap: 0.4rem;
+  }
+
+  .minesweeper-button {
+    min-height: 2.6rem;
+    padding: 0.5rem 0.7rem;
+  }
+}
