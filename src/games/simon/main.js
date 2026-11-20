@@ -194,9 +194,12 @@ function handleReset() {
   game = resetGame();
   audioReady = false;
   void closeAudio();
-  audioNotice.textContent = isAudioSupported()
-    ? "スタート後に音声を開始します。"
-    : "このブラウザーでは音声を使わず、画面表示で遊べます。";
+  // リセット後も消音設定は維持するため、案内を現在の設定に合わせます。
+  audioNotice.textContent = muted
+    ? "消音中です。画面のパッド表示で順番を確認してください。"
+    : isAudioSupported()
+      ? "スタート後に音声を開始します。"
+      : "このブラウザーでは音声を使わず、画面表示で遊べます。";
   updateControls();
 }
 
