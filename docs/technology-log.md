@@ -22,6 +22,8 @@
 | [サイモンゲーム](../src/games/simon/) | 意図的な技術試行 | Web Audio API。AudioContext、OscillatorNode、GainNodeで短い音を合成し、音声処理をルールから分ける。 | AudioContextをユーザー操作後に開始する制約、音の合成と停止、消音・非対応時の扱いを試した。ゲームルールはNode.jsでテストし、音声APIがなくても視覚操作で遊べるようにした。 | [#26](https://github.com/hayashihiroki-paya/static-minigame/issues/26) |
 | [2048](../src/games/2048/) | 意図的な技術試行 | 盤面の行・列を移動方向に並べ替え、空きを詰めて同じ値を一度だけ合成する状態更新アルゴリズム。 | 4方向を共通の座標処理で扱い、乱数を注入して移動後のタイル生成を決定的にテストできるようにした。 | [#34](https://github.com/hayashihiroki-paya/static-minigame/issues/34) |
 
+| [反射神経テスト](../src/games/reaction-test/) | 意図的な技術試行 | `performance.now()`の単調増加時計と、注入可能な乱数・タイマーで待機と反応時間を管理する。 | 実際に合図を描画した時刻から反応時間を測り、待機キャンセル後の古いコールバックも世代番号で無効化する。固定時計・タイマーで非同期状態を再現可能にテストする。 | [#36](https://github.com/hayashihiroki-paya/static-minigame/issues/36) |
+
 ## 今後の更新方法
 
 - 新しいゲームの実装PRでは、この表にゲーム、主に試した技術・手法、学んだこと、関連Issueを追記します。

@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="合図が出たらすぐ押して、反応時間を測るゲームです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>反射神経テスト | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- 合図、待機、結果を同じ画面で確認し、ボタン一つでラウンドを進めます。 -->
+    <main class="page-shell reaction-page">
+      <header class="reaction-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>反射神経テスト</h1>
+        <p class="lead">合図が出たらすぐ押して、反応時間を測ろう。</p>
+      </header>
+
+      <section class="reaction-card" aria-labelledby="game-heading">
+        <h2 id="game-heading">ゲーム画面</h2>
+
+        <!-- 回数と直近の計測値を常に表示し、いま何を試しているか振り返れるようにします。 -->
+        <dl class="reaction-stats">
+          <div>
+            <dt>ラウンド</dt>
+            <dd id="round-output">0 / 5</dd>
+          </div>
+          <div>
+            <dt>直近の反応時間</dt>
+            <dd id="last-time-output">—</dd>
+          </div>
+        </dl>
+
+        <!-- 色は補助にし、合図そのものは短い文字でも視覚的に示します。 -->
+        <div id="signal-display" class="reaction-signal" data-phase="ready" aria-hidden="true">
+          準備
+        </div>
+
+        <div class="reaction-actions" role="group" aria-label="ゲーム操作">
+          <button id="action-button" class="reaction-button reaction-button--primary" type="button">
+            記録を始める
+          </button>
+          <button id="reset-button" class="reaction-button" type="button">
+            記録をリセット
+          </button>
+        </div>
+
+        <p class="reaction-help" id="interaction-help">
+          合図の前に押すとフライングです。結果のあとに「次のラウンドへ」を押してください。
+          キーボードはTabでボタンを選び、EnterまたはSpaceで操作できます。
+        </p>
+
+        <!-- 5回分を残して、平均値や最速値の元になった記録を確認できます。 -->
+        <ol id="round-results" class="reaction-round-results" aria-label="各ラウンドの反応時間"></ol>
+
+        <section id="result-summary" class="reaction-summary" aria-labelledby="summary-heading" hidden>
+          <h3 id="summary-heading">5ラウンドの記録</h3>
+          <dl>
+            <div>
+              <dt>平均</dt>
+              <dd id="average-output">—</dd>
+            </div>
+            <div>
+              <dt>最速</dt>
+              <dd id="fastest-output">—</dd>
+            </div>
+          </dl>
+        </section>
+
+        <p id="game-feedback" class="reaction-feedback" role="status" aria-live="polite" aria-atomic="true">
+          準備ができたら「記録を始める」を押してください。
+        </p>
+      </section>
+
+      <footer class="site-footer">
+        <p>結果は5ラウンドの平均と最速で表示します。記録はこの画面を閉じると保存されません。</p>
+      </footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
