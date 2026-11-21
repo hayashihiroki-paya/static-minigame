@@ -87,6 +87,18 @@ const mazeEscapeStyles = await readFile(
   new URL("../src/games/maze-escape/style.css", import.meta.url),
   "utf8",
 );
+const slidingPuzzlePage = await readFile(
+  new URL("../src/games/sliding-puzzle/index.html", import.meta.url),
+  "utf8",
+);
+const slidingPuzzleMain = await readFile(
+  new URL("../src/games/sliding-puzzle/main.js", import.meta.url),
+  "utf8",
+);
+const slidingPuzzleStyles = await readFile(
+  new URL("../src/games/sliding-puzzle/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -360,4 +372,27 @@ test("迷路脱出は画面幅に合わせて盤面を縮め、タッチ操作�
   assert.match(mazeEscapeStyles, /:focus-visible/);
   assert.match(mazeEscapeMain, /ArrowUp/);
   assert.match(mazeEscapeMain, /event\.preventDefault\(\)/);
+});
+
+test("8パズルは一覧にあり、盤面・ヒント・再開を日本語で操作できる", () => {
+  // ホーム導線、盤面ラベル、操作ボタン、読み上げ通知、静的モジュールを確認します。
+  assert.match(page, /href="\.\/src\/games\/sliding-puzzle\/"/);
+  assert.match(page, /<h3>8パズル<\/h3>/);
+  assert.match(slidingPuzzlePage, /<html lang="ja">/);
+  assert.match(slidingPuzzlePage, /aria-label="8パズルの盤面"/);
+  assert.match(slidingPuzzlePage, /id="hint-button"/);
+  assert.match(slidingPuzzlePage, /id="restart-button"/);
+  assert.match(slidingPuzzlePage, /role="status" aria-live="polite"/);
+  assert.match(slidingPuzzlePage, /<script type="module" src="\.\/main\.js"><\/script>/);
+  assert.match(slidingPuzzleMain, /ArrowUp/);
+  assert.match(slidingPuzzleMain, /event\.preventDefault\(\)/);
+});
+
+test("8パズルの盤面は狭い画面に収まり、タッチ操作に対応する", () => {
+  // 3列の盤面、狭い画面用の余白、ボタンのタッチ・フォーカスを確認します。
+  assert.match(slidingPuzzleStyles, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(slidingPuzzleStyles, /@media \(max-width: 520px\)/);
+  assert.match(slidingPuzzleStyles, /touch-action: manipulation/);
+  assert.match(slidingPuzzleStyles, /min-height: 3\.25rem/);
+  assert.match(slidingPuzzleStyles, /:focus-visible/);
 });
