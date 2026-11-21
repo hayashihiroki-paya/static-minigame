@@ -16,12 +16,9 @@
 | [マルバツゲーム](../src/games/tic-tac-toe/) | 初期の学習記録 | HTML/CSS/JavaScript。8通りの勝ち筋をデータとして列挙し、盤面状態から勝利・引き分けを判定する。 | 盤面を配列で表し、手番と終了状態を含むルールをテストから再現した。 | [#14](https://github.com/hayashihiroki-paya/static-minigame/issues/14) |
 | [ライツアウト](../src/games/lights-out/) | 意図的な技術試行 | TypeScriptとVite。型検査とブラウザー向けビルドを行い、生成物を静的ファイルとして配信する。 | 型で盤面状態を表し、ビルド時の変換と実行時の静的配信を分けた。 | [#16](https://github.com/hayashihiroki-paya/static-minigame/issues/16) |
 | [ブロック崩し](../src/games/breakout/) | 意図的な技術試行 | Canvas 2D APIとrequestAnimationFrame。固定時間刻みで状態を進め、衝突ルールを描画処理から分ける。 | Canvas座標での描画、フレーム更新、衝突判定を試し、時間と入力を固定したロジックテストを用意した。 | [#20](https://github.com/hayashihiroki-paya/static-minigame/issues/20) |
-
 | [スネーク](../src/games/snake/) | 意図的な技術試行 | Svelte 5とVite。\`$state\`・\`$derived\`で盤面と表示を同期し、ゲームルールは通常のJavaScriptモジュールへ分ける。 | Svelteのリアクティブな状態管理とコンポーネントを試しつつ、ルールをUIから独立させてNode.jsの組み込みテストで決定的に確認できた。静的ビルドで配信するための構成も記録した。 | [#24](https://github.com/hayashihiroki-paya/static-minigame/issues/24) |
-
 | [サイモンゲーム](../src/games/simon/) | 意図的な技術試行 | Web Audio API。AudioContext、OscillatorNode、GainNodeで短い音を合成し、音声処理をルールから分ける。 | AudioContextをユーザー操作後に開始する制約、音の合成と停止、消音・非対応時の扱いを試した。ゲームルールはNode.jsでテストし、音声APIがなくても視覚操作で遊べるようにした。 | [#26](https://github.com/hayashihiroki-paya/static-minigame/issues/26) |
 | [2048](../src/games/2048/) | 意図的な技術試行 | 盤面の行・列を移動方向に並べ替え、空きを詰めて同じ値を一度だけ合成する状態更新アルゴリズム。 | 4方向を共通の座標処理で扱い、乱数を注入して移動後のタイル生成を決定的にテストできるようにした。 | [#34](https://github.com/hayashihiroki-paya/static-minigame/issues/34) |
-
 | [反射神経テスト](../src/games/reaction-test/) | 意図的な技術試行 | `performance.now()`の単調増加時計と、注入可能な乱数・タイマーで待機と反応時間を管理する。 | 実際に合図を描画した時刻から反応時間を測り、待機キャンセル後の古いコールバックも世代番号で無効化する。固定時計・タイマーで非同期状態を再現可能にテストする。 | [#36](https://github.com/hayashihiroki-paya/static-minigame/issues/36) |
 | [迷路脱出](../src/games/maze-escape/) | 意図的な技術試行 | スタックを使った反復型の深さ優先探索で、未訪問の隣室へ進み、行き止まりでは戻りながら迷路を生成する。 | 訪問済み管理とバックトラッキングを使い、全室がつながる迷路を作る。乱数を注入し、別の幅優先探索で接続性とゴール経路を検証する。 | [#38](https://github.com/hayashihiroki-paya/static-minigame/issues/38) |
 
