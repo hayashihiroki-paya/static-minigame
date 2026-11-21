@@ -75,6 +75,18 @@ const reactionTestStyles = await readFile(
   new URL("../src/games/reaction-test/style.css", import.meta.url),
   "utf8",
 );
+const mazeEscapePage = await readFile(
+  new URL("../src/games/maze-escape/index.html", import.meta.url),
+  "utf8",
+);
+const mazeEscapeMain = await readFile(
+  new URL("../src/games/maze-escape/main.js", import.meta.url),
+  "utf8",
+);
+const mazeEscapeStyles = await readFile(
+  new URL("../src/games/maze-escape/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -322,4 +334,30 @@ test("反射神経テストは単調増加時計と取消可能な待機タイ�
   assert.match(reactionTestLogic, /MIN_WAIT_MS \+ Math\.floor/);
   assert.match(reactionTestStyles, /@media \(max-width: 520px\)/);
   assert.match(reactionTestStyles, /touch-action: manipulation/);
+});
+
+test("迷路脱出は一覧にあり、日本語の状態通知と方向ボタンを持つ", () => {
+  // 迷路の入口、移動操作、読み上げ通知、静的モジュールの接続を確認します。
+  assert.match(page, /href="\.\/src\/games\/maze-escape\/"/);
+  assert.match(page, /<h3>迷路脱出<\/h3>/);
+  assert.match(mazeEscapePage, /<html lang="ja">/);
+  assert.match(mazeEscapePage, /role="group" aria-label="迷路の移動"/);
+  assert.match(mazeEscapePage, /data-direction="up"/);
+  assert.match(mazeEscapePage, /data-direction="left"/);
+  assert.match(mazeEscapePage, /data-direction="down"/);
+  assert.match(mazeEscapePage, /data-direction="right"/);
+  assert.match(mazeEscapePage, /role="status" aria-live="polite"/);
+  assert.match(mazeEscapePage, /新しい迷路/);
+  assert.match(mazeEscapePage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("迷路脱出は画面幅に合わせて盤面を縮め、タッチ操作に対応する", () => {
+  // 11列の盤面を狭い画面に収め、押しやすいボタン領域とフォーカス表示を用意します。
+  assert.match(mazeEscapeStyles, /grid-template-columns: repeat\(11, minmax\(0, 1fr\)\)/);
+  assert.match(mazeEscapeStyles, /@media \(max-width: 520px\)/);
+  assert.match(mazeEscapeStyles, /touch-action: manipulation/);
+  assert.match(mazeEscapeStyles, /min-height: 3\.25rem/);
+  assert.match(mazeEscapeStyles, /:focus-visible/);
+  assert.match(mazeEscapeMain, /ArrowUp/);
+  assert.match(mazeEscapeMain, /event\.preventDefault\(\)/);
 });
