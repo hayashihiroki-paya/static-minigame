@@ -1,0 +1,260 @@
+/* このページ専用のクラスを使い、ほかのゲームの見た目に影響させません。 */
+.game2048-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.game2048-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.game2048-card {
+  width: min(100%, 37rem);
+  margin: 0 auto;
+  padding: clamp(0.85rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.game2048-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.game2048-score {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: 0 0 1rem;
+  padding: 0.7rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+}
+
+.game2048-score strong {
+  font-size: 1.4rem;
+}
+
+/* 盤面の背景とすき間を設け、数字タイルと空きマスを形でも分けます。 */
+.game2048-board {
+  display: grid;
+  width: min(100%, 32rem);
+  gap: clamp(0.25rem, 1.4vw, 0.55rem);
+  margin: 0 auto;
+  padding: clamp(0.35rem, 2vw, 0.65rem);
+  border: 1px solid #aeb9cf;
+  border-radius: 1rem;
+  background: #cbd3e8;
+  outline-offset: 4px;
+}
+
+.game2048-board:focus-visible {
+  outline: 3px solid #263a91;
+}
+
+.game2048-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.25rem, 1.4vw, 0.55rem);
+}
+
+/* 正方形セルを保ち、桁数が増えてもタイル内に数字を収めます。 */
+.game2048-cell {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  overflow: hidden;
+  border-radius: 0.55rem;
+  background: #dfe5f2;
+  color: #433a32;
+  font-size: clamp(1.1rem, 8vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.game2048-cell[data-value="2"] {
+  background: #eee4da;
+}
+
+.game2048-cell[data-value="4"] {
+  background: #ede0c8;
+}
+
+.game2048-cell[data-value="8"] {
+  background: #f3b77f;
+}
+
+.game2048-cell[data-value="16"] {
+  background: #efa66d;
+}
+
+.game2048-cell[data-value="32"] {
+  background: #ed925e;
+}
+
+.game2048-cell[data-value="64"] {
+  background: #e77b52;
+}
+
+.game2048-cell[data-value="128"] {
+  background: #eacb6b;
+}
+
+.game2048-cell[data-value="256"] {
+  background: #e6c254;
+}
+
+.game2048-cell[data-value="512"] {
+  background: #dfb73d;
+}
+
+.game2048-cell[data-value="1024"] {
+  background: #d8aa2f;
+}
+
+.game2048-cell[data-value="2048"] {
+  background: #d39c23;
+}
+
+.game2048-cell[data-digits="3"] {
+  font-size: clamp(0.9rem, 6vw, 1.9rem);
+}
+
+.game2048-cell[data-digits="4"],
+.game2048-cell[data-digits="5"] {
+  font-size: clamp(0.72rem, 4.8vw, 1.5rem);
+}
+
+/* 方向ボタンは十字に並べ、スマートフォンでも押しやすい大きさを保ちます。 */
+.game2048-directions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  width: min(100%, 18rem);
+  margin: 1rem auto 0;
+}
+
+.game2048-direction {
+  min-height: 3rem;
+  padding: 0.55rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.7rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.game2048-direction--up {
+  grid-column: 2;
+}
+
+.game2048-direction--left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.game2048-direction--down {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.game2048-direction--right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.game2048-direction:hover:not(:disabled) {
+  background: #e8ecff;
+}
+
+.game2048-direction:focus-visible,
+.game2048-button:focus-visible,
+.game2048-page .back-link:focus-visible {
+  outline: 3px solid #263a91;
+  outline-offset: 3px;
+}
+
+.game2048-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.9rem;
+}
+
+.game2048-button {
+  min-height: 3rem;
+  padding: 0.65rem 1rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.75rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.game2048-button--primary {
+  border-color: #3649a5;
+  background: #4357b6;
+  color: #fff;
+}
+
+.game2048-button--primary:hover {
+  background: #34479f;
+}
+
+/* 操作説明と結果を盤面と分け、状態を文字でも確認できるようにします。 */
+.game2048-help {
+  margin: 0.9rem auto 0;
+  color: #566176;
+  font-size: 0.92rem;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.game2048-feedback {
+  min-height: 3.3rem;
+  margin: 0.9rem 0 0;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* 狭い画面ではカード余白を詰め、盤面と操作説明を横幅内に収めます。 */
+@media (max-width: 520px) {
+  .game2048-card {
+    padding: 0.65rem;
+  }
+
+  .game2048-row {
+    gap: 0.25rem;
+  }
+
+  .game2048-board {
+    gap: 0.25rem;
+    padding: 0.35rem;
+  }
+
+  .game2048-directions {
+    width: min(100%, 16rem);
+  }
+}

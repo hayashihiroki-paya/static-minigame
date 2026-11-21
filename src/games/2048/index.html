@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="タイルを動かして合成し、2048を目指すゲームです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>2048 | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- 数字タイルを4×4の盤面で動かし、方向ボタンとキーから操作できるようにします。 -->
+    <main class="page-shell game2048-page">
+      <header class="game2048-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>2048</h1>
+        <p class="lead">同じ数字のタイルを合成して、2048を目指そう。</p>
+      </header>
+
+      <section class="game2048-card" aria-labelledby="game-heading">
+        <h2 id="game-heading">ゲーム画面</h2>
+
+        <!-- スコアは合成値の合計として表示し、更新時は画面と読み上げに反映します。 -->
+        <p class="game2048-score">スコア <strong id="score-output">0</strong></p>
+
+        <!-- gridへ4行×4列のセルを作り、盤面をひとまとまりとして読み上げます。 -->
+        <div
+          id="game2048-board"
+          class="game2048-board"
+          role="grid"
+          aria-label="2048の4行4列の盤面"
+          aria-describedby="control-help game-feedback"
+          tabindex="0"
+        ></div>
+
+        <!-- ボタンはキーボード・タッチどちらでも方向を選べる入力手段です。 -->
+        <div class="game2048-directions" role="group" aria-label="タイルの移動方向">
+          <button class="game2048-direction game2048-direction--up" type="button" data-direction="up" aria-label="上へ移動">
+            ↑ 上
+          </button>
+          <button class="game2048-direction game2048-direction--left" type="button" data-direction="left" aria-label="左へ移動">
+            ← 左
+          </button>
+          <button class="game2048-direction game2048-direction--down" type="button" data-direction="down" aria-label="下へ移動">
+            ↓ 下
+          </button>
+          <button class="game2048-direction game2048-direction--right" type="button" data-direction="right" aria-label="右へ移動">
+            → 右
+          </button>
+        </div>
+
+        <div class="game2048-actions">
+          <button id="new-game-button" class="game2048-button game2048-button--primary" type="button">
+            新しいゲーム
+          </button>
+        </div>
+
+        <p class="game2048-help" id="control-help">
+          盤面を選択して矢印キーで移動できます。画面の方向ボタンはキーボードとタッチで操作できます。
+        </p>
+        <p id="game-feedback" class="game2048-feedback" role="status" aria-live="polite" aria-atomic="true">
+          同じ数字を合わせて2048を目指しましょう。
+        </p>
+      </section>
+
+      <footer class="site-footer">
+        <p>移動が成功すると新しいタイルが1つ現れます。2048達成後も続けて遊べます。</p>
+      </footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

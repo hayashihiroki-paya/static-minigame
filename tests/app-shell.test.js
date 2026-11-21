@@ -47,6 +47,18 @@ const minesweeperStyles = await readFile(
   new URL("../src/games/minesweeper/style.css", import.meta.url),
   "utf8",
 );
+const game2048Page = await readFile(
+  new URL("../src/games/2048/index.html", import.meta.url),
+  "utf8",
+);
+const game2048Main = await readFile(
+  new URL("../src/games/2048/main.js", import.meta.url),
+  "utf8",
+);
+const game2048Styles = await readFile(
+  new URL("../src/games/2048/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -240,4 +252,30 @@ test("開いたセルと旗セルには未開封セル用のhover色を適用し
   );
   assert.doesNotMatch(minesweeperStyles, /\.minesweeper-cell:hover:not\(:disabled\)\s*\{/);
   assert.match(minesweeperStyles, /\.minesweeper-cell--revealed\s*\{[^}]*background: #f0f3fa;/s);
+});
+
+
+test("2048は一覧から開け、盤面とタッチ可能な方向ボタンを持つ", () => {
+  // ゲーム一覧、4×4盤面、方向ボタン、状態読み上げを日本語ページに揃えます。
+  assert.match(page, /href="\.\/src\/games\/2048\/"/);
+  assert.match(page, /<h3>2048<\/h3>/);
+  assert.match(game2048Page, /<html lang="ja">/);
+  assert.match(game2048Page, /role="grid"[^>]*aria-label="2048の4行4列の盤面"/);
+  assert.match(game2048Page, /data-direction="up"/);
+  assert.match(game2048Page, /data-direction="left"/);
+  assert.match(game2048Page, /data-direction="down"/);
+  assert.match(game2048Page, /data-direction="right"/);
+  assert.match(game2048Page, /role="status" aria-live="polite"/);
+  assert.match(game2048Page, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("2048は矢印キーと狭い画面の操作に対応する", () => {
+  // キー入力を盤面に結び、4列表示とタッチ操作を専用CSSで整えます。
+  assert.match(game2048Main, /ArrowUp/);
+  assert.match(game2048Main, /ArrowDown/);
+  assert.match(game2048Main, /ArrowLeft/);
+  assert.match(game2048Main, /ArrowRight/);
+  assert.match(game2048Styles, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
+  assert.match(game2048Styles, /@media \(max-width: 520px\)/);
+  assert.match(game2048Styles, /touch-action: manipulation/);
 });
