@@ -1,0 +1,196 @@
+/* このページ専用のクラスに閉じ、ほかのゲームのレイアウトを変えません。 */
+.reaction-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.reaction-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+/* 操作と集計を一つのカードにまとめ、小さい画面でも内容を追いやすくします。 */
+.reaction-card {
+  width: min(100%, 37rem);
+  margin: 0 auto;
+  padding: clamp(0.85rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.reaction-card h2 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+/* 回数と時間を並べて、試行の進み具合を色に頼らず読めるようにします。 */
+.reaction-stats,
+.reaction-summary dl {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+}
+
+.reaction-stats div,
+.reaction-summary dl div {
+  min-width: 0;
+  padding: 0.75rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  text-align: center;
+}
+
+.reaction-stats dt,
+.reaction-summary dt {
+  color: #566176;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.reaction-stats dd,
+.reaction-summary dd {
+  margin: 0.3rem 0 0;
+  color: #263a91;
+  font-size: 1.25rem;
+  font-weight: 900;
+}
+
+/* 合図の状態は色と短い文字で表し、色の違いだけを操作の手がかりにしません。 */
+.reaction-signal {
+  display: grid;
+  min-height: clamp(9rem, 42vw, 15rem);
+  place-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 2px solid #cbd3e8;
+  border-radius: 1.25rem;
+  background: #f7f8ff;
+  color: #263456;
+  font-size: clamp(1.7rem, 8vw, 3.2rem);
+  font-weight: 900;
+  text-align: center;
+}
+
+.reaction-signal[data-phase="waiting"] {
+  border-color: #a97710;
+  background: #fff1c9;
+  color: #604500;
+}
+
+.reaction-signal[data-phase="go"] {
+  border-color: #246b4a;
+  background: #dff5e9;
+  color: #12462d;
+}
+
+.reaction-signal[data-phase="false-start"] {
+  border-color: #a52e3c;
+  background: #fbe4e6;
+  color: #771c28;
+}
+
+/* 標準ボタンを大きく保ち、タッチとキーボードのどちらでも操作しやすくします。 */
+.reaction-actions {
+  display: grid;
+  width: min(100%, 24rem);
+  gap: 0.65rem;
+  margin: 0 auto;
+}
+
+.reaction-button {
+  min-height: 3.25rem;
+  padding: 0.7rem 1rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.8rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.reaction-button--primary {
+  border-color: #3649a5;
+  background: #4357b6;
+  color: #fff;
+}
+
+.reaction-button--primary:hover {
+  background: #34479f;
+}
+
+.reaction-button:focus-visible {
+  outline: 3px solid #263a91;
+  outline-offset: 3px;
+}
+
+/* 説明、履歴、ライブ通知を分けて、操作手順と試行内容を読み返せるようにします。 */
+.reaction-help {
+  margin: 1rem auto 0;
+  color: #566176;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.reaction-round-results {
+  display: grid;
+  gap: 0.35rem;
+  margin: 1rem 0 0;
+  padding-left: 1.5rem;
+  color: #263456;
+  font-variant-numeric: tabular-nums;
+}
+
+.reaction-summary {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #dfe5f2;
+  border-radius: 1rem;
+  background: #fafbff;
+}
+
+.reaction-summary h3 {
+  margin: 0 0 0.75rem;
+  text-align: center;
+}
+
+.reaction-feedback {
+  min-height: 3.4rem;
+  margin: 1rem 0 0;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* 520px以下ではカードの余白を減らし、統計とボタンを横幅内に収めます。 */
+@media (max-width: 520px) {
+  .reaction-card {
+    padding: 0.65rem;
+  }
+
+  .reaction-stats,
+  .reaction-summary dl {
+    gap: 0.45rem;
+  }
+
+  .reaction-stats div,
+  .reaction-summary dl div {
+    padding: 0.55rem 0.35rem;
+  }
+
+  .reaction-button {
+    min-height: 3.25rem;
+  }
+}

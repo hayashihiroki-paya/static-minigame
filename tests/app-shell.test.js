@@ -59,6 +59,22 @@ const game2048Styles = await readFile(
   new URL("../src/games/2048/style.css", import.meta.url),
   "utf8",
 );
+const reactionTestPage = await readFile(
+  new URL("../src/games/reaction-test/index.html", import.meta.url),
+  "utf8",
+);
+const reactionTestLogic = await readFile(
+  new URL("../src/games/reaction-test/logic.js", import.meta.url),
+  "utf8",
+);
+const reactionTestMain = await readFile(
+  new URL("../src/games/reaction-test/main.js", import.meta.url),
+  "utf8",
+);
+const reactionTestStyles = await readFile(
+  new URL("../src/games/reaction-test/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -278,4 +294,32 @@ test("2048は矢印キーと狭い画面の操作に対応する", () => {
   assert.match(game2048Styles, /grid-template-columns: repeat\(4, minmax\(0, 1fr\)\)/);
   assert.match(game2048Styles, /@media \(max-width: 520px\)/);
   assert.match(game2048Styles, /touch-action: manipulation/);
+});
+
+
+test("反射神経テストは一覧にあり、状態を日本語で読み上げる", () => {
+  // ゲームへの導線、操作ボタン、ライブ通知、ローカルモジュールを確認します。
+  assert.match(page, /href="\.\/src\/games\/reaction-test\/"/);
+  assert.match(page, /<h3>反射神経テスト<\/h3>/);
+  assert.match(reactionTestPage, /<html lang="ja">/);
+  assert.match(reactionTestPage, /id="action-button"[^>]*type="button"/);
+  assert.match(reactionTestPage, /id="reset-button"[^>]*type="button"/);
+  assert.match(reactionTestPage, /role="status" aria-live="polite"/);
+  assert.match(reactionTestPage, /次のラウンドへ/);
+  assert.match(reactionTestPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("反射神経テストは終了後の1回の操作で新しいラウンドを始める", () => {
+  // 表示された「新しい記録を始める」操作で、リセット後すぐ待機に進むことを確認します。
+  assert.match(reactionTestMain, /controller\.reset\(\);\s*controller\.startRound\(\);/);
+});
+
+test("反射神経テストは単調増加時計と取消可能な待機タイマーを使う", () => {
+  // 実際の合図時刻から測り、待機中のリセットで古い合図を無効化します。
+  assert.match(reactionTestLogic, /globalThis\.performance\.now\(\)/);
+  assert.match(reactionTestLogic, /timerGeneration/);
+  assert.match(reactionTestLogic, /cancelPendingTimer/);
+  assert.match(reactionTestLogic, /MIN_WAIT_MS \+ Math\.floor/);
+  assert.match(reactionTestStyles, /@media \(max-width: 520px\)/);
+  assert.match(reactionTestStyles, /touch-action: manipulation/);
 });
