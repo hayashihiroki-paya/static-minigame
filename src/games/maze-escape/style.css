@@ -1,0 +1,189 @@
+/* このゲーム専用のクラスに閉じ、既存ページの見た目には影響させません。 */
+.maze-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.maze-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.maze-card {
+  width: min(100%, 39rem);
+  margin: 0 auto;
+  padding: clamp(0.85rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.maze-card h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.maze-help {
+  margin: 0 auto 1rem;
+  color: #566176;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* 11×11の部屋を同じ大きさで並べ、壁のある辺だけ濃い枠で示します。 */
+.maze-board {
+  display: grid;
+  width: min(100%, 34rem);
+  aspect-ratio: 1;
+  grid-template-columns: repeat(11, minmax(0, 1fr));
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: #eef2fa;
+}
+
+.maze-cell {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 2px solid transparent;
+  color: #243b8f;
+  font-size: clamp(0.65rem, 2.6vw, 1.1rem);
+  font-weight: 900;
+  line-height: 1;
+}
+
+.maze-cell[data-wall-up="true"] {
+  border-top-color: #293754;
+}
+
+.maze-cell[data-wall-right="true"] {
+  border-right-color: #293754;
+}
+
+.maze-cell[data-wall-down="true"] {
+  border-bottom-color: #293754;
+}
+
+.maze-cell[data-wall-left="true"] {
+  border-left-color: #293754;
+}
+
+.maze-cell--start {
+  background: #e8edff;
+}
+
+.maze-cell--goal {
+  background: #fff1c9;
+}
+
+.maze-cell--goal:not(.maze-cell--player)::before {
+  content: "★";
+}
+
+.maze-cell--player {
+  background: #dff5e9;
+  color: #12462d;
+}
+
+.maze-cell--player::before {
+  content: "●";
+}
+
+.maze-move-count {
+  margin: 0.85rem 0;
+  color: #263456;
+  font-size: 1.1rem;
+  font-weight: 800;
+  text-align: center;
+}
+
+/* 十字型の方向ボタンは大きい標準ボタンにし、タッチでも押しやすくします。 */
+.maze-controls {
+  display: grid;
+  width: min(100%, 16rem);
+  grid-template-areas:
+    ". up ."
+    "left down right";
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0 auto 0.75rem;
+}
+
+.maze-direction,
+.maze-restart {
+  min-height: 3.25rem;
+  padding: 0.6rem 0.85rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.75rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.maze-direction--up {
+  grid-area: up;
+}
+
+.maze-direction--left {
+  grid-area: left;
+}
+
+.maze-direction--down {
+  grid-area: down;
+}
+
+.maze-direction--right {
+  grid-area: right;
+}
+
+.maze-direction:disabled {
+  cursor: default;
+  opacity: 0.55;
+}
+
+.maze-restart {
+  display: block;
+  width: min(100%, 16rem);
+  margin: 0 auto;
+  background: #4357b6;
+  color: #fff;
+}
+
+.maze-direction:focus-visible,
+.maze-restart:focus-visible {
+  outline: 3px solid #263a91;
+  outline-offset: 3px;
+}
+
+.maze-feedback {
+  min-height: 3.4rem;
+  margin: 1rem 0 0;
+  padding: 0.8rem 1rem;
+  border-radius: 0.75rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .maze-card {
+    padding: 0.65rem;
+  }
+
+  .maze-controls {
+    gap: 0.4rem;
+  }
+}

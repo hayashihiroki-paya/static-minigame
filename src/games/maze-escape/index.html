@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="自動生成される迷路を進み、右下のゴールを目指すゲームです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>迷路脱出 | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- 盤面、移動数、方向ボタンをひとつの画面にまとめています。 -->
+    <main class="page-shell maze-page">
+      <header class="maze-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>迷路脱出</h1>
+        <p class="lead">左上から出発して、右下のゴールを目指そう。</p>
+      </header>
+
+      <section class="maze-card" aria-labelledby="maze-heading">
+        <h2 id="maze-heading">迷路</h2>
+        <p class="maze-help">
+          ●から★へ進みます。矢印キーまたはW・A・S・D、画面の方向ボタンで移動できます。
+        </p>
+
+        <!-- 盤面の位置は視覚的に示し、現在の状態は下のライブ領域でも伝えます。 -->
+        <div id="maze-board" class="maze-board" aria-hidden="true"></div>
+
+        <p class="maze-move-count">移動数：<span id="move-count">0</span></p>
+
+        <div class="maze-controls" role="group" aria-label="迷路の移動">
+          <button class="maze-direction maze-direction--up" type="button" data-direction="up" aria-label="上へ移動">↑</button>
+          <button class="maze-direction maze-direction--left" type="button" data-direction="left" aria-label="左へ移動">←</button>
+          <button class="maze-direction maze-direction--down" type="button" data-direction="down" aria-label="下へ移動">↓</button>
+          <button class="maze-direction maze-direction--right" type="button" data-direction="right" aria-label="右へ移動">→</button>
+        </div>
+
+        <button id="restart-button" class="maze-restart" type="button">新しい迷路</button>
+        <p id="game-feedback" class="maze-feedback" role="status" aria-live="polite" aria-atomic="true">
+          迷路を作りました。左上の●から右下の★へ進みましょう。
+        </p>
+      </section>
+
+      <footer class="site-footer">
+        <p>壁のある方向には進めません。ゴールまでの移動数を記録します。</p>
+      </footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
