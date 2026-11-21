@@ -67,6 +67,10 @@ const reactionTestLogic = await readFile(
   new URL("../src/games/reaction-test/logic.js", import.meta.url),
   "utf8",
 );
+const reactionTestMain = await readFile(
+  new URL("../src/games/reaction-test/main.js", import.meta.url),
+  "utf8",
+);
 const reactionTestStyles = await readFile(
   new URL("../src/games/reaction-test/style.css", import.meta.url),
   "utf8",
@@ -303,6 +307,11 @@ test("反射神経テストは一覧にあり、状態を日本語で読み上�
   assert.match(reactionTestPage, /role="status" aria-live="polite"/);
   assert.match(reactionTestPage, /次のラウンドへ/);
   assert.match(reactionTestPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("反射神経テストは終了後の1回の操作で新しいラウンドを始める", () => {
+  // 表示された「新しい記録を始める」操作で、リセット後すぐ待機に進むことを確認します。
+  assert.match(reactionTestMain, /controller\.reset\(\);\s*controller\.startRound\(\);/);
 });
 
 test("反射神経テストは単調増加時計と取消可能な待機タイマーを使う", () => {

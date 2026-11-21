@@ -119,7 +119,9 @@ actionButton.addEventListener("click", () => {
   } else if (phase === "waiting" || phase === "go") {
     controller.submitResponse();
   } else {
+    // 終了状態からは一度の操作で記録を初期化し、次の待機まで始めます。
     controller.reset();
+    controller.startRound();
   }
 });
 
