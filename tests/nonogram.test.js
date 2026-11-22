@@ -46,10 +46,14 @@ test("数字ヒントに必要な長さを超える候補を拒否する", () =>
 
 test("行と列の候補を交差位置で伝播して絞り込む", () => {
   const result = propagateCandidates(Array(CELL_COUNT).fill(CELL_MARK.UNKNOWN));
+  const originalRowCandidates = getLinePatterns(ROW_CLUES[0]);
+  const originalColumnCandidates = getLinePatterns(COLUMN_CLUES[1]);
 
   assert.equal(result.contradiction, false);
-  assert.deepEqual(result.rowCandidates[2], [0b11111]);
-  assert.deepEqual(result.columnCandidates[0], [0b11111]);
+  assert.equal(originalRowCandidates.length, 6);
+  assert.equal(result.rowCandidates[0].length, 1);
+  assert.equal(originalColumnCandidates.length, 4);
+  assert.equal(result.columnCandidates[1].length, 1);
   assert.ok(result.rowCandidates.every((patterns) => patterns.length > 0));
   assert.ok(result.columnCandidates.every((patterns) => patterns.length > 0));
 });
@@ -77,6 +81,11 @@ test("一手ヒントは候補から確定したマスを示し、入力状態�
 
   assert.ok(hinted.hint);
   assert.equal(hinted.hint.mark === CELL_MARK.FILLED || hinted.hint.mark === CELL_MARK.EMPTY, true);
+  const solutionIsFilled = ((SOLUTION_ROWS[hinted.hint.row] >> hinted.hint.column) & 1) === 1;
+  assert.equal(
+    hinted.hint.mark,
+    solutionIsFilled ? CELL_MARK.FILLED : CELL_MARK.EMPTY,
+  );
   assert.match(hinted.hintText, /\d+行\d+列/);
   assert.deepEqual(hinted.marks, game.marks);
   assert.equal(game.hint, null);
@@ -130,3 +139,4 @@ test("新しいゲームは盤面とヒントを初期化し、不正な入力�
   assert.equal(markCell(filled, -1, CELL_MARK.FILLED), filled);
   assert.equal(markCell(filled, 0, "invalid"), filled);
 });
+
