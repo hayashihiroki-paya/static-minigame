@@ -99,6 +99,18 @@ const slidingPuzzleStyles = await readFile(
   new URL("../src/games/sliding-puzzle/style.css", import.meta.url),
   "utf8",
 );
+const nonogramPage = await readFile(
+  new URL("../src/games/nonogram/index.html", import.meta.url),
+  "utf8",
+);
+const nonogramMain = await readFile(
+  new URL("../src/games/nonogram/main.js", import.meta.url),
+  "utf8",
+);
+const nonogramStyles = await readFile(
+  new URL("../src/games/nonogram/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -395,4 +407,33 @@ test("8パズルの盤面は狭い画面に収まり、タッチ操作に対応�
   assert.match(slidingPuzzleStyles, /touch-action: manipulation/);
   assert.match(slidingPuzzleStyles, /min-height: 3\.25rem/);
   assert.match(slidingPuzzleStyles, /:focus-visible/);
+});
+
+test("ノノグラムは一覧にあり、日本語のヒント・入力モード・盤面を持つ", () => {
+  // ページの導線、3つの入力状態、行列ヒントの領域、状態通知を確認します。
+  assert.match(page, /href="\.\/src\/games\/nonogram\/"/);
+  assert.match(page, /<h3>ノノグラム<\/h3>/);
+  assert.match(nonogramPage, /<html lang="ja">/);
+  assert.match(nonogramPage, /data-mark="filled"/);
+  assert.match(nonogramPage, /data-mark="empty"/);
+  assert.match(nonogramPage, /data-mark="unknown"/);
+  assert.match(nonogramPage, /id="row-clues"/);
+  assert.match(nonogramPage, /id="column-clues"[^>]*role="group"/);
+  assert.match(nonogramPage, /id="row-clues"[^>]*role="group"/);
+  assert.match(nonogramPage, /Tabで移動し、EnterまたはSpace/);
+  assert.match(nonogramPage, /id="nonogram-board"[^>]*role="group"/);
+  assert.match(nonogramPage, /id="hint-button"/);
+  assert.match(nonogramPage, /id="restart-button"/);
+  assert.match(nonogramPage, /role="status" aria-live="polite"/);
+  assert.match(nonogramPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+  assert.match(nonogramMain, /markCell\(game, cellIndex, selectedMark\)/);
+});
+
+test("ノノグラムはタッチしやすいマスと狭い画面向けの配置を持つ", () => {
+  // ボタンの最小寸法、フォーカス表示、狭い画面での調整を専用CSSで確認します。
+  assert.match(nonogramStyles, /min-height: 2\.75rem/);
+  assert.match(nonogramStyles, /touch-action: manipulation/);
+  assert.match(nonogramStyles, /:focus-visible/);
+  assert.match(nonogramStyles, /@media \(max-width: 520px\)/);
+  assert.match(nonogramStyles, /grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
 });

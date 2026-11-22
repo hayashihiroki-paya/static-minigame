@@ -1,0 +1,242 @@
+/* ゲーム固有の名前空間に閉じ、ほかのページのカードやボタンへ影響させません。 */
+.nonogram-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.nonogram-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.nonogram-card {
+  width: min(100%, 39rem);
+  margin: 0 auto;
+  padding: clamp(0.7rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.nonogram-card h2 {
+  margin: 0 0 0.6rem;
+  font-size: 1.35rem;
+  text-align: center;
+}
+
+.nonogram-help {
+  max-width: 32rem;
+  margin: 0 auto 1rem;
+  color: #566176;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.nonogram-modes {
+  display: grid;
+  width: min(100%, 29rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.5rem;
+  margin: 0 auto 1rem;
+}
+
+.nonogram-mode-button,
+.nonogram-action-button {
+  min-width: 0;
+  min-height: 2.9rem;
+  padding: 0.55rem 0.7rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.7rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.nonogram-mode-button.is-selected {
+  border-color: #3649a5;
+  background: #e8edff;
+  color: #263a91;
+  box-shadow: inset 0 0 0 1px #3649a5;
+}
+
+/* 左に行ヒント、上に列ヒントを置き、数字とセルの位置を揃えます。 */
+.nonogram-layout {
+  display: grid;
+  width: min(100%, 31rem);
+  grid-template-columns: clamp(2.8rem, 14vw, 4rem) repeat(5, minmax(0, 1fr));
+  grid-template-rows: auto auto;
+  gap: 0.2rem;
+  margin: 0 auto;
+}
+
+.nonogram-layout__corner {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.nonogram-column-clues {
+  display: grid;
+  min-height: 3.3rem;
+  grid-column: 2 / -1;
+  grid-row: 1;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.18rem;
+}
+
+.nonogram-row-clues {
+  display: grid;
+  grid-column: 1;
+  grid-row: 2;
+  grid-template-rows: repeat(5, minmax(2.75rem, 1fr));
+  gap: 0.18rem;
+}
+
+.nonogram-clue {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  color: #38445b;
+  font-size: clamp(0.82rem, 3.5vw, 1rem);
+  font-weight: 800;
+  list-style: none;
+}
+
+.nonogram-clue--column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.12rem;
+}
+
+.nonogram-clue--row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.15rem;
+  padding-right: 0.2rem;
+}
+
+.nonogram-clue li {
+  min-width: 1rem;
+  text-align: center;
+}
+
+.nonogram-board {
+  display: grid;
+  grid-column: 2 / -1;
+  grid-row: 2;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  grid-template-rows: repeat(5, minmax(0, 1fr));
+  gap: 0.18rem;
+  aspect-ratio: 1;
+}
+
+.nonogram-cell {
+  display: grid;
+  min-width: 0;
+  min-height: 2.75rem;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #bfc9df;
+  border-radius: 0.4rem;
+  background: #f8f9fd;
+  color: #344b9c;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(1rem, 6vw, 1.8rem);
+  font-weight: 900;
+  line-height: 1;
+  touch-action: manipulation;
+}
+
+.nonogram-cell:hover:not(:disabled) {
+  background: #edf1ff;
+}
+
+.nonogram-cell.is-filled {
+  border-color: #263456;
+  background: #344768;
+  color: #fff;
+}
+
+.nonogram-cell.is-empty-mark {
+  background: #fff4f4;
+  color: #a63e50;
+}
+
+.nonogram-cell.is-hinted {
+  outline: 3px solid #16704a;
+  outline-offset: 1px;
+  box-shadow: inset 0 0 0 2px #dff5e9;
+}
+
+.nonogram-actions {
+  display: grid;
+  width: min(100%, 29rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.6rem;
+  margin: 1rem auto 0;
+}
+
+.nonogram-action-button--hint {
+  border-color: #3649a5;
+  background: #4357b6;
+  color: #fff;
+}
+
+.nonogram-mode-button:focus-visible,
+.nonogram-action-button:focus-visible,
+.nonogram-cell:focus-visible {
+  outline: 3px solid #16704a;
+  outline-offset: 3px;
+}
+
+.nonogram-action-button:disabled,
+.nonogram-cell:disabled {
+  cursor: default;
+  opacity: 0.72;
+}
+
+.nonogram-feedback {
+  min-height: 3.3rem;
+  margin: 0.9rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.7rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .nonogram-card {
+    padding: 0.65rem;
+  }
+
+  .nonogram-layout {
+    gap: 0.15rem;
+  }
+
+  .nonogram-column-clues,
+  .nonogram-row-clues {
+    gap: 0.12rem;
+  }
+
+  .nonogram-board {
+    gap: 0.12rem;
+  }
+
+  .nonogram-cell {
+    border-radius: 0.3rem;
+  }
+}

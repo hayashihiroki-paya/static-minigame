@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="行と列の数字を手がかりに絵を完成させるノノグラムです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>ノノグラム | ミニゲーム集</title>
+  </head>
+  <body>
+    <!-- 5×5盤面、入力モード、ヒントを並べ、初めてでも操作を選べるようにします。 -->
+    <main class="page-shell nonogram-page">
+      <header class="nonogram-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>ノノグラム</h1>
+        <p class="lead">行と列の数字を手がかりに、隠れた絵を完成させよう。</p>
+      </header>
+
+      <section class="nonogram-card" aria-labelledby="nonogram-heading">
+        <h2 id="nonogram-heading">5×5のパズル</h2>
+        <p class="nonogram-help">
+          数字は連続して塗るマスの数です。入力モードを選び、マスを押してください。キーボードではTabで移動し、EnterまたはSpaceで選べます。
+        </p>
+
+        <div class="nonogram-modes" role="group" aria-label="マスの入力モード">
+          <button class="nonogram-mode-button is-selected" type="button" data-mark="filled" aria-pressed="true">
+            塗る
+          </button>
+          <button class="nonogram-mode-button" type="button" data-mark="empty" aria-pressed="false">
+            空きの印
+          </button>
+          <button class="nonogram-mode-button" type="button" data-mark="unknown" aria-pressed="false">
+            消す
+          </button>
+        </div>
+
+        <div class="nonogram-layout" role="group" aria-label="ノノグラムのヒントと盤面">
+          <div class="nonogram-layout__corner" aria-hidden="true"></div>
+          <div id="column-clues" class="nonogram-column-clues" role="group" aria-label="列のヒント"></div>
+          <div id="row-clues" class="nonogram-row-clues" role="group" aria-label="行のヒント"></div>
+          <div id="nonogram-board" class="nonogram-board" role="group" aria-label="5行5列の盤面"></div>
+        </div>
+
+        <div class="nonogram-actions" role="group" aria-label="ゲーム操作">
+          <button id="hint-button" class="nonogram-action-button nonogram-action-button--hint" type="button">
+            一手ヒント
+          </button>
+          <button id="restart-button" class="nonogram-action-button" type="button">
+            最初から遊ぶ
+          </button>
+        </div>
+
+        <p id="game-feedback" class="nonogram-feedback" role="status" aria-live="polite" aria-atomic="true">
+          塗るモードです。行と列の数字を手がかりに進めましょう。
+        </p>
+      </section>
+
+      <footer class="site-footer">
+        <p>各数字は、同じ行または列で連続して塗るマスのまとまりを表します。</p>
+      </footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
