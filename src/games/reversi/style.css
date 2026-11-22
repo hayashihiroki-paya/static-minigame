@@ -1,0 +1,214 @@
+/* リバーシ固有のクラス名に閉じ、共通ページや別ゲームへ影響させません。 */
+.reversi-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.reversi-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.reversi-card {
+  width: min(100%, 43rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.reversi-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  text-align: center;
+}
+
+.reversi-scores {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.5rem, 8vw, 4rem);
+  margin: 0.3rem 0 0.8rem;
+  color: #263456;
+  font-weight: 800;
+}
+
+.reversi-scores p {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+}
+
+.reversi-scores strong {
+  min-width: 1.6em;
+  font-size: 1.25rem;
+  text-align: center;
+}
+
+.disc-swatch {
+  width: 1rem;
+  height: 1rem;
+  border: 1px solid #1c2638;
+  border-radius: 50%;
+}
+
+.disc-swatch--black {
+  background: #17202d;
+}
+
+.disc-swatch--white {
+  background: #fff;
+}
+
+.reversi-help {
+  max-width: 35rem;
+  margin: 0 auto 0.9rem;
+  color: #566176;
+  line-height: 1.65;
+  text-align: center;
+}
+
+.reversi-board {
+  display: grid;
+  width: min(100%, 38rem);
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0.17rem;
+  margin: 0 auto;
+  padding: 0.35rem;
+  border: 2px solid #123e35;
+  border-radius: 0.8rem;
+  background: #145a49;
+  box-shadow: 0 0.45rem 1rem rgb(23 57 52 / 16%);
+}
+
+.reversi-row {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.17rem;
+}
+
+.reversi-cell {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 1px solid #31806b;
+  border-radius: 0.16rem;
+  background: #23745e;
+  color: #101820;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: clamp(1.4rem, 7vw, 3.15rem);
+  font-weight: 900;
+  line-height: 1;
+  touch-action: manipulation;
+}
+
+.reversi-cell.is-white {
+  color: #fff;
+  -webkit-text-stroke: 1px #273345;
+  text-shadow: 0 1px 2px rgb(0 0 0 / 30%);
+}
+
+.reversi-cell.is-legal::after {
+  width: 0.28em;
+  height: 0.28em;
+  border-radius: 50%;
+  background: #d4ff65;
+  box-shadow: 0 0 0 2px rgb(11 52 40 / 50%);
+  content: "";
+}
+
+.reversi-cell.is-legal:hover {
+  background: #32876f;
+}
+
+.reversi-cell:focus-visible,
+.reversi-action-button:focus-visible {
+  z-index: 1;
+  outline: 3px solid #f8f16b;
+  outline-offset: 1px;
+}
+
+.reversi-cell[aria-disabled="true"] {
+  cursor: default;
+}
+
+.reversi-actions {
+  display: flex;
+  justify-content: center;
+  margin: 0.9rem 0 0;
+}
+
+.reversi-action-button {
+  min-width: min(100%, 13rem);
+  min-height: 2.9rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid #3649a5;
+  border-radius: 0.7rem;
+  background: #4357b6;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.reversi-feedback {
+  min-height: 3.4rem;
+  margin: 0.8rem 0 0;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.7rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.reversi-learning {
+  margin: 1rem 0 0;
+  padding: 0.8rem 0.95rem;
+  border-left: 4px solid #6275c6;
+  border-radius: 0.4rem;
+  background: #f7f8ff;
+}
+
+.reversi-learning h3 {
+  margin: 0 0 0.3rem;
+  color: #263456;
+  font-size: 1rem;
+}
+
+.reversi-learning p {
+  margin: 0;
+  color: #566176;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .reversi-card {
+    padding: 0.6rem;
+  }
+
+  .reversi-board {
+    gap: 0.1rem;
+    padding: 0.22rem;
+    border-radius: 0.55rem;
+  }
+
+  .reversi-row {
+    gap: 0.1rem;
+  }
+
+  .reversi-cell {
+    border-radius: 0.1rem;
+    font-size: clamp(1.1rem, 8vw, 2.4rem);
+  }
+}
