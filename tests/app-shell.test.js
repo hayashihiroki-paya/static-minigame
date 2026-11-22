@@ -111,6 +111,18 @@ const nonogramStyles = await readFile(
   new URL("../src/games/nonogram/style.css", import.meta.url),
   "utf8",
 );
+const reversiPage = await readFile(
+  new URL("../src/games/reversi/index.html", import.meta.url),
+  "utf8",
+);
+const reversiMain = await readFile(
+  new URL("../src/games/reversi/main.js", import.meta.url),
+  "utf8",
+);
+const reversiStyles = await readFile(
+  new URL("../src/games/reversi/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -436,4 +448,31 @@ test("ノノグラムはタッチしやすいマスと狭い画面向けの配�
   assert.match(nonogramStyles, /:focus-visible/);
   assert.match(nonogramStyles, /@media \(max-width: 520px\)/);
   assert.match(nonogramStyles, /grid-template-columns: repeat\(5, minmax\(0, 1fr\)\)/);
+});
+
+test("リバーシは一覧にあり、日本語の盤面・石数・対局操作を持つ", () => {
+  // ホーム導線、盤面ラベル、スコア、状態通知、リスタートを確認します。
+  assert.match(page, /href="\.\/src\/games\/reversi\/"/);
+  assert.match(page, /<h3>リバーシ<\/h3>/);
+  assert.match(reversiPage, /<html lang="ja">/);
+  assert.match(reversiPage, /role="grid"[^>]*aria-label="リバーシの8行8列の盤面"/);
+  assert.match(reversiPage, /id="black-score"/);
+  assert.match(reversiPage, /id="white-score"/);
+  assert.match(reversiPage, /id="restart-button"[^>]*type="button"/);
+  assert.match(reversiPage, /role="status" aria-live="polite"/);
+  assert.match(reversiPage, /<script type="module" src="\.\/main\.js"><\/script>/);
+  assert.match(reversiPage, /αβ枝刈り/);
+});
+
+test("リバーシは矢印キー・タッチ・狭い画面の盤面に対応する", () => {
+  // 盤面内の矢印移動、標準ボタン入力、8列表示と狭い画面向けCSSを確認します。
+  assert.match(reversiMain, /ArrowUp/);
+  assert.match(reversiMain, /ArrowDown/);
+  assert.match(reversiMain, /ArrowLeft/);
+  assert.match(reversiMain, /ArrowRight/);
+  assert.match(reversiMain, /event\.preventDefault\(\)/);
+  assert.match(reversiStyles, /grid-template-columns: repeat\(8, minmax\(0, 1fr\)\)/);
+  assert.match(reversiStyles, /@media \(max-width: 520px\)/);
+  assert.match(reversiStyles, /touch-action: manipulation/);
+  assert.match(reversiStyles, /:focus-visible/);
 });
