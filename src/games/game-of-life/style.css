@@ -1,0 +1,195 @@
+/* ライフゲーム固有の名前空間に閉じ、他のページの盤面へ影響させません。 */
+.life-header {
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.life-page .back-link {
+  display: inline-block;
+  margin-bottom: 2rem;
+  color: #3649a5;
+  font-weight: 700;
+  text-underline-offset: 0.2em;
+}
+
+.life-card {
+  width: min(100%, 43rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 1.8rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.life-card h2 {
+  margin: 0 0 0.5rem;
+  font-size: 1.35rem;
+  text-align: center;
+}
+
+.life-stats {
+  display: flex;
+  justify-content: center;
+  gap: clamp(1.4rem, 8vw, 3rem);
+  margin: 0.35rem 0 0.7rem;
+  color: #263456;
+  font-weight: 800;
+}
+
+.life-stats p {
+  margin: 0;
+}
+
+.life-stats strong {
+  display: inline-block;
+  min-width: 2.2em;
+  text-align: center;
+}
+
+.life-help {
+  max-width: 36rem;
+  margin: 0 auto 0.85rem;
+  color: #566176;
+  line-height: 1.65;
+  text-align: center;
+}
+
+/* 盤面は狭い画面で横スクロールにし、タッチ時にもセルを押せる大きさを保ちます。 */
+.life-board-scroll {
+  width: 100%;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.life-board {
+  display: grid;
+  width: min(100%, 34rem);
+  min-width: 30rem;
+  grid-template-rows: repeat(20, minmax(0, 1fr));
+  gap: 2px;
+  margin: 0 auto;
+  padding: 0.35rem;
+  border: 2px solid #123e35;
+  border-radius: 0.75rem;
+  background: #145a49;
+  aspect-ratio: 1;
+}
+
+.life-row {
+  display: grid;
+  grid-template-columns: repeat(20, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.life-cell {
+  min-width: 0;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 1px solid #a6c9c0;
+  border-radius: 2px;
+  background: #e8f2ef;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.life-cell.is-alive {
+  border-color: #173b32;
+  background: #173b32;
+}
+
+.life-cell:focus-visible,
+.life-button:focus-visible {
+  position: relative;
+  z-index: 1;
+  outline: 3px solid #f5a623;
+  outline-offset: 1px;
+}
+
+.life-cell:disabled {
+  cursor: default;
+}
+
+.life-actions {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin: 0.9rem 0 0;
+}
+
+.life-button {
+  min-width: 0;
+  min-height: 2.9rem;
+  padding: 0.5rem 0.7rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.7rem;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.life-button--primary {
+  border-color: #3649a5;
+  background: #4357b6;
+  color: #fff;
+}
+
+.life-button--secondary {
+  background: #f7f8ff;
+  color: #263456;
+}
+
+.life-button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+.life-feedback {
+  min-height: 3.3rem;
+  margin: 0.8rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.7rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.life-rules {
+  margin: 0.9rem 0 0;
+  padding: 0.8rem 0.95rem;
+  border-left: 4px solid #6275c6;
+  border-radius: 0.4rem;
+  background: #f7f8ff;
+}
+
+.life-rules h3 {
+  margin: 0 0 0.3rem;
+  color: #263456;
+  font-size: 1rem;
+}
+
+.life-rules p {
+  margin: 0;
+  color: #566176;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .life-card {
+    padding: 0.6rem;
+  }
+
+  .life-board {
+    width: 30rem;
+    margin-left: 0;
+    padding: 0.25rem;
+  }
+
+  .life-actions {
+    grid-template-columns: 1fr;
+  }
+}
