@@ -123,6 +123,18 @@ const reversiStyles = await readFile(
   new URL("../src/games/reversi/style.css", import.meta.url),
   "utf8",
 );
+const lifePage = await readFile(
+  new URL("../src/games/game-of-life/index.html", import.meta.url),
+  "utf8",
+);
+const lifeMain = await readFile(
+  new URL("../src/games/game-of-life/main.js", import.meta.url),
+  "utf8",
+);
+const lifeStyles = await readFile(
+  new URL("../src/games/game-of-life/style.css", import.meta.url),
+  "utf8",
+);
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -475,4 +487,37 @@ test("リバーシは矢印キー・タッチ・狭い画面の盤面に対応�
   assert.match(reversiStyles, /@media \(max-width: 520px\)/);
   assert.match(reversiStyles, /touch-action: manipulation/);
   assert.match(reversiStyles, /:focus-visible/);
+});
+
+test("ライフゲームは一覧にあり、日本語の盤面・世代操作・状態通知を持つ", () => {
+  // ホーム導線、盤面ラベル、世代操作、ライブ通知を確認します。
+  assert.match(page, /href="\.\/src\/games\/game-of-life\/"/);
+  assert.match(page, /<h3>ライフゲーム<\/h3>/);
+  assert.match(lifePage, /<html lang="ja">/);
+  assert.match(lifePage, /role="grid"[^>]*aria-label="ライフゲームの20行20列の盤面"/);
+  assert.match(lifePage, /id="step-button"/);
+  assert.match(lifePage, /id="run-button"/);
+  assert.match(lifePage, /id="reset-button"/);
+  assert.match(lifePage, /role="status" aria-live="polite"/);
+  assert.match(lifePage, /生存セルは近傍が2個または3個/);
+  assert.match(lifePage, /<script type="module" src="\.\/main\.js"><\/script>/);
+});
+
+test("ライフゲームのセルはgridcellに適したラベルで生死状態を伝える", () => {
+  // gridcellにはトグルボタン専用のaria-pressedを付けず、名前に生死状態を含めます。
+  assert.match(lifeMain, /cell\.setAttribute\("aria-label", `\$\{row \+ 1\}行\$\{column \+ 1\}列、生存セル/);
+  assert.doesNotMatch(lifeMain, /cell\.setAttribute\("aria-pressed"/);
+});
+
+test("ライフゲームはキーボード操作と狭い画面のスクロール盤面に対応する", () => {
+  // 矢印移動・標準ボタン操作、スクロール領域、狭い画面向け操作配置を確認します。
+  assert.match(lifeMain, /ArrowUp/);
+  assert.match(lifeMain, /ArrowDown/);
+  assert.match(lifeMain, /ArrowLeft/);
+  assert.match(lifeMain, /ArrowRight/);
+  assert.match(lifeMain, /event\.preventDefault\(\)/);
+  assert.match(lifeStyles, /overflow-x: auto/);
+  assert.match(lifeStyles, /@media \(max-width: 520px\)/);
+  assert.match(lifeStyles, /touch-action: manipulation/);
+  assert.match(lifeStyles, /:focus-visible/);
 });
