@@ -503,6 +503,12 @@ test("ライフゲームは一覧にあり、日本語の盤面・世代操作�
   assert.match(lifePage, /<script type="module" src="\.\/main\.js"><\/script>/);
 });
 
+test("ライフゲームのセルはgridcellに適したラベルで生死状態を伝える", () => {
+  // gridcellにはトグルボタン専用のaria-pressedを付けず、名前に生死状態を含めます。
+  assert.match(lifeMain, /cell\.setAttribute\("aria-label", `\$\{row \+ 1\}行\$\{column \+ 1\}列、生存セル/);
+  assert.doesNotMatch(lifeMain, /cell\.setAttribute\("aria-pressed"/);
+});
+
 test("ライフゲームはキーボード操作と狭い画面のスクロール盤面に対応する", () => {
   // 矢印移動・標準ボタン操作、スクロール領域、狭い画面向け操作配置を確認します。
   assert.match(lifeMain, /ArrowUp/);
