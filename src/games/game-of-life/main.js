@@ -59,7 +59,6 @@ function render() {
     cell.classList.toggle("is-alive", isAlive);
     cell.disabled = isRunning;
     cell.tabIndex = index === focusedCell ? 0 : -1;
-    cell.setAttribute("aria-pressed", String(isAlive));
     cell.setAttribute("aria-label", `${row + 1}行${column + 1}列、生存セル${isAlive ? "あり" : "なし"}`);
   }
 
