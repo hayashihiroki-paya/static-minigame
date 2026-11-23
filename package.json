@@ -12,12 +12,18 @@
     "check:types": "tsc --project tsconfig.json",
     "check": "npm run check:syntax && npm run check:types && npm test",
     "build": "vite build",
-    "build:snake": "vite build --config vite.snake.config.js"
+    "build:snake": "vite build --config vite.snake.config.js",
+    "build:whack-a-mole": "vite build --config vite.whack-a-mole.config.js"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
+    "@vitejs/plugin-react": "^6.3.0",
     "svelte": "^5.58.0",
     "typescript": "^7.0.2",
     "vite": "^8.3.8"
+  },
+  "dependencies": {
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   }
 }

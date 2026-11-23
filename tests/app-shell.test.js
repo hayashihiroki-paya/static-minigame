@@ -135,6 +135,26 @@ const lifeStyles = await readFile(
   new URL("../src/games/game-of-life/style.css", import.meta.url),
   "utf8",
 );
+const whackPage = await readFile(
+  new URL("../src/games/whack-a-mole/index.html", import.meta.url),
+  "utf8",
+);
+const whackApp = await readFile(
+  new URL("../src/games/whack-a-mole/WhackAMoleApp.jsx", import.meta.url),
+  "utf8",
+);
+const whackStyles = await readFile(
+  new URL("../src/games/whack-a-mole/style.css", import.meta.url),
+  "utf8",
+);
+const whackViteConfig = await readFile(
+  new URL("../vite.whack-a-mole.config.js", import.meta.url),
+  "utf8",
+);
+const packageManifest = JSON.parse(
+  await readFile(new URL("../package.json", import.meta.url), "utf8"),
+);
+const ciWorkflow = await readFile(new URL("../.github/workflows/ci.yml", import.meta.url), "utf8");
 
 test("home page declares Japanese as its language", () => {
   assert.match(page, /<html lang="ja">/);
@@ -520,4 +540,43 @@ test("ライフゲームはキーボード操作と狭い画面のスクロー�
   assert.match(lifeStyles, /@media \(max-width: 520px\)/);
   assert.match(lifeStyles, /touch-action: manipulation/);
   assert.match(lifeStyles, /:focus-visible/);
+});
+
+test("もぐらたたきは一覧からReactの静的ページを開ける", () => {
+  // Reactの入口はViteでビルドしたdist配下へ案内します。
+  assert.match(page, /href="\.\/dist\/games\/whack-a-mole\/"/);
+  assert.match(page, /<h3>もぐらたたき<\/h3>/);
+  assert.match(whackPage, /<html lang="ja">/);
+  assert.match(whackPage, /<div id="root"><\/div>/);
+  assert.match(whackPage, /<script type="module" src="\.\/main\.jsx"><\/script>/);
+  assert.match(whackPage, /<title>もぐらたたき \| ミニゲーム集<\/title>/);
+});
+
+test("もぐらたたきはReactの状態・タイマーを使い、穴の状態をボタン名で伝える", () => {
+  // Reactの副作用は終了時に解除し、状態で押し方が変わらない穴は通常のボタンとして扱います。
+  assert.match(whackApp, /useState/);
+  assert.match(whackApp, /useEffect/);
+  assert.match(whackApp, /window\.setTimeout/);
+  assert.match(whackApp, /window\.clearTimeout/);
+  assert.match(whackApp, /role="status" aria-live="polite"/);
+  assert.match(whackApp, /aria-label=\{`穴\$\{holeIndex \+ 1\}、\$\{hasMole \? "モグラがいます" : "モグラはいません"\}`\}/);
+  assert.doesNotMatch(whackApp, /aria-pressed/);
+  assert.match(whackStyles, /grid-template-columns: repeat\(3, minmax\(0, 1fr\)\)/);
+  assert.match(whackStyles, /@media \(max-width: 520px\)/);
+  assert.match(whackStyles, /touch-action: manipulation/);
+  assert.match(whackStyles, /:focus-visible/);
+});
+
+test("もぐらたたきのReactビルドを静的に生成し、CIで確認する", () => {
+  // React用依存・専用出力先・CIのビルド手順を一緒に更新します。
+  assert.ok(packageManifest.dependencies.react);
+  assert.ok(packageManifest.dependencies["react-dom"]);
+  assert.ok(packageManifest.devDependencies["@vitejs/plugin-react"]);
+  assert.equal(
+    packageManifest.scripts["build:whack-a-mole"],
+    "vite build --config vite.whack-a-mole.config.js",
+  );
+  assert.match(whackViteConfig, /@vitejs\/plugin-react/);
+  assert.match(whackViteConfig, /dist\/games\/whack-a-mole/);
+  assert.match(ciWorkflow, /npm run build:whack-a-mole/);
 });
