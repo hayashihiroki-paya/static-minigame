@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="同じ色でつながったタイルを消して、盤面を整理するさめがめです。" />
+    <title>さめがめ | ミニゲーム集</title>
+    <script type="module" crossorigin src="./assets/index.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index.css">
+  </head>
+  <body>
+    <main class="page-shell same-game-page">
+      <header class="same-game-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>さめがめ</h1>
+        <p class="lead">同じ色で上下左右につながったタイルを、2個以上まとめて消そう。</p>
+      </header>
+
+      <section class="same-game-card" aria-labelledby="board-heading">
+        <h2 id="board-heading">タイルを選んで消そう</h2>
+
+        <dl class="same-game-stats" aria-label="ゲームの記録">
+          <div>
+            <dt>得点</dt>
+            <dd><strong id="score-output">0</strong>点</dd>
+          </div>
+          <div>
+            <dt>盤面のタイル</dt>
+            <dd><strong id="tile-count-output">100</strong>個</dd>
+          </div>
+        </dl>
+
+        <p class="same-game-help" id="board-help">
+          2個以上の同色グループを押すと消えます。タイルは下へ落ち、空の列は左へ詰まります。
+          キーボードはTabで選び、EnterまたはSpaceで消せます。
+        </p>
+
+        <div class="same-board-scroll" aria-label="盤面のスクロール領域">
+          <div id="same-board" class="same-board" role="group" aria-label="さめがめの10行10列の盤面" aria-describedby="board-help game-feedback"></div>
+        </div>
+
+        <p id="game-feedback" class="same-game-feedback" role="status" aria-live="polite" aria-atomic="true">
+          同じ色で上下左右につながったタイルを2個以上まとめて選んでください。
+        </p>
+
+        <button id="reset-button" class="same-game-button" type="button">最初から遊ぶ</button>
+
+        <aside class="same-game-rules" aria-label="得点と終了条件">
+          <h3>ルール</h3>
+          <p>取り除いたタイル数の二乗が得点です。タイルを全部消すとクリア、消せるグループがなくなると終了です。</p>
+        </aside>
+      </section>
+
+      <footer class="site-footer">
+        <p>斜めに触れているタイルは、同じグループに含まれません。</p>
+      </footer>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,12 @@
+[package]
+name = "same-game"
+version = "0.1.0"
+edition = "2021"
+description = "SameGame rules compiled to WebAssembly for static-minigame"
+repository = "https://github.com/hayashihiroki-paya/static-minigame"
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+wasm-bindgen = "0.2"

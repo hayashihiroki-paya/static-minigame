@@ -1,4 +1,7 @@
 node_modules/
+/target/
+/src/games/same-game/target/
+/src/games/same-game/pkg/
 dist/*
 !dist/games/
 dist/games/*
@@ -8,4 +11,7 @@ dist/games/lights-out/*
 !dist/games/snake/
 dist/games/snake/*
 !dist/games/snake/**
+!dist/games/same-game/
+dist/games/same-game/*
+!dist/games/same-game/**
 .DS_Store
