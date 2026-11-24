@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="円盤を小さい順に積み替え、最短手順にも挑戦するハノイの塔です。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>ハノイの塔 | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell hanoi-page">
+      <header class="hanoi-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>ハノイの塔</h1>
+        <p class="lead">円盤を一枚ずつ移動し、右の棒へ小さい順に積み替えよう。</p>
+      </header>
+
+      <section class="hanoi-card" aria-labelledby="board-heading">
+        <h2 id="board-heading">円盤を右の棒へ移そう</h2>
+
+        <dl class="hanoi-stats" aria-label="移動数">
+          <div>
+            <dt>移動数</dt>
+            <dd><strong id="move-count">0</strong>手</dd>
+          </div>
+          <div>
+            <dt>最短手数</dt>
+            <dd><strong>15</strong>手</dd>
+          </div>
+        </dl>
+
+        <p class="hanoi-help" id="control-help">
+          移動元の棒を選び、次に移動先の棒を選んでください。大きい円盤を小さい円盤の上には置けません。
+          Tabで棒を選び、EnterまたはSpaceで操作できます。
+        </p>
+
+        <div class="hanoi-board" role="group" aria-label="ハノイの塔の3本の棒">
+          <button class="hanoi-rod" type="button" data-rod-index="0" aria-label="左の棒、円盤4枚" aria-pressed="false">
+            <span class="hanoi-rod-name">左の棒</span>
+            <span class="hanoi-pole" aria-hidden="true"></span>
+            <span class="hanoi-stack" aria-hidden="true">
+              <span class="hanoi-disk" data-size="4">4</span>
+              <span class="hanoi-disk" data-size="3">3</span>
+              <span class="hanoi-disk" data-size="2">2</span>
+              <span class="hanoi-disk" data-size="1">1</span>
+            </span>
+          </button>
+          <button class="hanoi-rod" type="button" data-rod-index="1" aria-label="中央の棒、円盤0枚" aria-pressed="false">
+            <span class="hanoi-rod-name">中央の棒</span>
+            <span class="hanoi-pole" aria-hidden="true"></span>
+            <span class="hanoi-stack" aria-hidden="true"></span>
+          </button>
+          <button class="hanoi-rod" type="button" data-rod-index="2" aria-label="右の棒、円盤0枚" aria-pressed="false">
+            <span class="hanoi-rod-name">右の棒（ゴール）</span>
+            <span class="hanoi-pole" aria-hidden="true"></span>
+            <span class="hanoi-stack" aria-hidden="true"></span>
+          </button>
+        </div>
+
+        <p id="game-feedback" class="hanoi-feedback" role="status" aria-live="polite" aria-atomic="true">
+          左の棒から円盤を移動してください。
+        </p>
+
+        <div class="hanoi-actions" role="group" aria-label="ゲーム操作">
+          <button id="reset-button" class="hanoi-button" type="button">最初から遊ぶ</button>
+          <button id="solution-button" class="hanoi-button hanoi-button--primary" type="button" aria-expanded="false" aria-controls="solution-section">
+            最短手順を見る
+          </button>
+        </div>
+
+        <section id="solution-section" class="hanoi-solution" aria-labelledby="solution-heading" hidden>
+          <h3 id="solution-heading">初期配置からの最短手順（15手）</h3>
+          <ol id="solution-list" class="hanoi-solution-list"></ol>
+        </section>
+      </section>
+
+      <footer class="site-footer">
+        <p>一度に動かせるのは一番上の円盤だけです。円盤の大小の順番を守って移動してください。</p>
+      </footer>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
