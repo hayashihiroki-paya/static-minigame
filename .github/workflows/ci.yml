@@ -22,8 +22,16 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
+      - name: RustとWebAssemblyターゲットを設定
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: wasm-packをインストール
+        run: cargo install wasm-pack --version 0.13.1 --locked
       - name: Install dependencies
         run: npm ci
+      - name: さめがめのRustルールをテスト
+        run: cargo test --manifest-path src/games/same-game/Cargo.toml --locked
       - name: Run quality checks
         run: npm run check
       - name: ライツアウトの静的ファイルをビルド
@@ -32,3 +40,5 @@ jobs:
         run: npm run build:snake
       - name: もぐらたたきの静的ファイルをビルド
         run: npm run build:whack-a-mole
+      - name: さめがめのWASM静的ファイルをビルド
+        run: npm run build:same-game

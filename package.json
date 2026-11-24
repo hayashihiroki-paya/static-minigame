@@ -8,12 +8,15 @@
   },
   "scripts": {
     "test": "node --test",
+    "pretest": "npm run build:same-game:wasm",
     "check:syntax": "node scripts/check-syntax.js",
     "check:types": "tsc --project tsconfig.json",
     "check": "npm run check:syntax && npm run check:types && npm test",
     "build": "vite build",
     "build:snake": "vite build --config vite.snake.config.js",
-    "build:whack-a-mole": "vite build --config vite.whack-a-mole.config.js"
+    "build:whack-a-mole": "vite build --config vite.whack-a-mole.config.js",
+    "build:same-game:wasm": "wasm-pack build src/games/same-game --target web --release --no-opt --out-dir pkg --out-name same_game",
+    "build:same-game": "npm run build:same-game:wasm && vite build --config vite.same-game.config.js"
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^7.3.1",
