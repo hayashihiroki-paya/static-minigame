@@ -1,0 +1,117 @@
+.warehouse-header {
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.warehouse-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.warehouse-card {
+  width: min(100%, 38rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  text-align: center;
+}
+
+.warehouse-stage,
+.warehouse-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.warehouse-card select,
+.warehouse-card button {
+  min-height: 2.75rem;
+  padding: 0.3rem 0.65rem;
+  border: 1px solid #a1afcf;
+  border-radius: 0.65rem;
+  background: #eef2ff;
+  color: #233766;
+  font: inherit;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.warehouse-card button:disabled {
+  background: #f0f2f5;
+  color: #606b7c;
+}
+
+#warehouse-help,
+.warehouse-legend {
+  margin: 0.65rem 0;
+  color: #445473;
+  font-size: 0.9rem;
+}
+
+#warehouse-board {
+  display: grid;
+  width: min(100%, 23rem);
+  margin: 0 auto;
+  gap: 2px;
+  padding: 3px;
+  border-radius: 0.45rem;
+  background: #c4ccda;
+}
+
+#warehouse-board [role="row"] {
+  display: grid;
+  grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
+  gap: 2px;
+}
+
+#warehouse-board [role="gridcell"] {
+  display: grid;
+  aspect-ratio: 1;
+  place-items: center;
+  border-radius: 0.2rem;
+  background: #f8fafc;
+  font-size: clamp(0.9rem, 4vw, 1.35rem);
+  line-height: 1;
+}
+
+#warehouse-board [data-kind="wall"] { background: #34415a; }
+#warehouse-board [data-kind="goal"] { background: #ffeaba; color: #704506; }
+#warehouse-board [data-kind="box"] { background: #f3d5b6; color: #753e12; }
+#warehouse-board [data-kind="player"] { background: #dbe8ff; color: #143a80; }
+#warehouse-board [data-kind="player-goal"] {
+  background: #ffeaba;
+  color: #143a80;
+  outline: 1px dashed #704506;
+  outline-offset: -3px;
+}
+#warehouse-board [data-kind="placed"] { background: #d8f3dc; color: #185c2d; }
+
+.warehouse-status {
+  min-height: 3.75rem;
+  margin: 0.75rem 0;
+  padding: 0.55rem;
+  border-radius: 0.65rem;
+  background: #eef2ff;
+  color: #233766;
+  font-weight: 700;
+}
+
+.warehouse-directions {
+  display: grid;
+  width: min(100%, 14rem);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.4rem;
+  margin: 0 auto 0.75rem;
+}
+
+.warehouse-directions [data-direction="up"] { grid-area: 1 / 2; }
+.warehouse-directions [data-direction="left"] { grid-area: 2 / 1; }
+.warehouse-directions [data-direction="down"] { grid-area: 2 / 2; }
+.warehouse-directions [data-direction="right"] { grid-area: 2 / 3; }
