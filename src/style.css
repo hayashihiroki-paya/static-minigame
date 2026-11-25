@@ -17,16 +17,32 @@
 body {
   min-width: 320px;
   min-height: 100vh;
+  min-height: 100svh;
   margin: 0;
+  line-height: 1.5;
 }
 
 .page-shell {
   display: flex;
   width: min(100% - 2rem, 960px);
   min-height: 100vh;
+  min-height: 100svh;
   flex-direction: column;
   margin: 0 auto;
-  padding: clamp(2rem, 7vw, 5rem) 0 1.5rem;
+  padding: clamp(2rem, 7vw, 5rem) 0 max(1.5rem, env(safe-area-inset-bottom, 0px));
+}
+
+/* ページ共通のフォーカス輪郭で、キーボード利用時の現在位置を示します。 */
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 3px solid #5369c8;
+  outline-offset: 3px;
+}
+
+/* 個別の translate を使い、ゲームが transform で示す状態と押下反応を重ねます。 */
+@media (prefers-reduced-motion: no-preference) {
+  :where(button:not(:disabled)):active {
+    translate: 0 1px;
+  }
 }
 
 .intro {
@@ -120,6 +136,23 @@ h1 {
   border-radius: 1.25rem;
   background: #fff;
   box-shadow: 0 1rem 3rem rgb(34 48 80 / 6%);
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+
+/* タッチ端末でキーボードを使う場合も、フォーカス中のカードを見分けられます。 */
+.game-card:focus-within {
+  transform: translateY(-2px);
+  border-color: #b8c3e6;
+  box-shadow: 0 1rem 2.5rem rgb(34 48 80 / 11%);
+}
+
+/* ホバーの反応は、実際にホバー操作ができるポインターだけに表示します。 */
+@media (hover: hover) {
+  .game-card:hover {
+    transform: translateY(-2px);
+    border-color: #b8c3e6;
+    box-shadow: 0 1rem 2.5rem rgb(34 48 80 / 11%);
+  }
 }
 
 .game-card__number {
@@ -182,5 +215,24 @@ h1 {
   .game-card__link {
     grid-column: 2;
     justify-self: start;
+  }
+}
+
+/* 動きを控える設定を尊重し、状態変化は動き以外の表示で伝えます。 */
+@media (prefers-reduced-motion: reduce) {
+  .game-card:focus-within,
+  .game-card:hover {
+    transform: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  .game-card,
+  :where(a, button, input, select, textarea, [tabindex]) {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
