@@ -38,13 +38,11 @@ body {
   outline-offset: 3px;
 }
 
-/* 押せるボタンに短い押下反応を加え、無効な操作状態には適用しません。 */
-:where(button):not(:disabled) {
-  transition: transform 120ms ease;
-}
-
-:where(button):not(:disabled):active {
-  transform: translateY(1px);
+/* 個別の translate を使い、ゲームが transform で示す状態と押下反応を重ねます。 */
+@media (prefers-reduced-motion: no-preference) {
+  :where(button:not(:disabled)):active {
+    translate: 0 1px;
+  }
 }
 
 .intro {
@@ -222,6 +220,11 @@ h1 {
 
 /* 動きを控える設定を尊重し、状態変化は動き以外の表示で伝えます。 */
 @media (prefers-reduced-motion: reduce) {
+  .game-card:focus-within,
+  .game-card:hover {
+    transform: none;
+  }
+
   html {
     scroll-behavior: auto;
   }

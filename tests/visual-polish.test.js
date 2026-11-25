@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import { test } from "node:test";
 
 const sharedStyles = await readFile(new URL("../src/style.css", import.meta.url), "utf8");
+const homePage = await readFile(new URL("../index.html", import.meta.url), "utf8");
 
 test("共通スタイルはキーボード操作中のフォーカス位置を表示する", () => {
   // ゲームごとの見た目を保ちながら、共通CSSが入力部品のフォーカスを補います。
@@ -12,9 +13,28 @@ test("共通スタイルはキーボード操作中のフォーカス位置を�
   );
 });
 
-test("ボタンの押下反応は有効なボタンだけに適用する", () => {
-  // ゲーム中に使えない操作へ、押せると誤解するアニメーションを出しません。
-  assert.match(sharedStyles, /:where\(button\):not\(:disabled\):active\s*\{[^}]*transform: translateY\(1px\)/);
+test("ボタンの押下反応は固有の変形を保ち、動きを減らす設定にも従う", () => {
+  const pressRule = sharedStyles.match(
+    /@media \(prefers-reduced-motion: no-preference\)\s*\{\s*:where\(button:not\(:disabled\)\):active\s*\{([^}]*)\}/,
+  );
+  assert.ok(pressRule);
+  assert.match(pressRule[1], /translate:\s*0 1px;/);
+  assert.doesNotMatch(pressRule[1], /transform\s*:/);
+});
+
+test("ホームの各ゲームリンクは見出しのゲーム名で区別できる", () => {
+  const cards = [...homePage.matchAll(/<article class="game-card">([\s\S]*?)<\/article>/g)];
+  assert.ok(cards.length > 0);
+  const names = new Set();
+
+  for (const [, card] of cards) {
+    const title = card.match(/<h3>([^<]+)<\/h3>/)?.[1];
+    const name = card.match(/<a class="game-card__link"[^>]*aria-label="([^"]+)"/)?.[1];
+    assert.ok(title);
+    assert.equal(name, title + "のゲームで遊ぶ");
+    names.add(name);
+  }
+  assert.equal(names.size, cards.length);
 });
 
 test("ホームカードはポインターとキーボードの選択状態を示す", () => {
