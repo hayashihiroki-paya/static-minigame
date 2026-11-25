@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="箱を押してゴールへ運ぶ倉庫パズルです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>倉庫パズル | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell warehouse-page">
+      <header class="warehouse-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>倉庫パズル</h1>
+        <p class="lead">箱を一つずつ押して、すべてのゴールへ運ぼう。</p>
+      </header>
+
+      <section class="warehouse-card" aria-labelledby="board-title">
+        <h2 id="board-title">荷運び</h2>
+        <div class="warehouse-stage">
+          <label for="warehouse-stage">ステージ</label>
+          <select id="warehouse-stage"></select>
+        </div>
+        <p id="warehouse-help">盤面にフォーカスして矢印キーを押すか、方向ボタンで移動します。</p>
+        <div id="warehouse-board" role="grid" aria-label="倉庫の盤面" aria-describedby="warehouse-help" tabindex="0"></div>
+        <div class="warehouse-legend" aria-label="盤面の記号">▲ プレイヤー　■ 箱　◎ ゴール　✓ ゴール上の箱</div>
+        <p id="warehouse-status" class="warehouse-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="warehouse-directions" role="group" aria-label="移動方向">
+          <button type="button" data-direction="up" aria-label="上へ移動">↑ 上</button>
+          <button type="button" data-direction="left" aria-label="左へ移動">← 左</button>
+          <button type="button" data-direction="down" aria-label="下へ移動">↓ 下</button>
+          <button type="button" data-direction="right" aria-label="右へ移動">→ 右</button>
+        </div>
+        <div class="warehouse-actions">
+          <button id="warehouse-undo" type="button" disabled>1手戻す</button>
+          <button id="warehouse-reset" type="button">最初から</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

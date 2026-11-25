@@ -28,6 +28,7 @@
 | [もぐらたたき](../src/games/whack-a-mole/) | 意図的な技術試行 | ReactとJSX。`useState`で画面状態を管理し、`useEffect`で1秒タイマーを予約して、終了・リセット時の後片付けをする。Vite Reactプラグインで静的ファイルへ変換する。 | 画面の状態更新とゲームルールを分け、乱数選択を状態更新関数の外に置いて遷移を決定的に保つ。Reactの副作用とクリーンアップ、既存のSvelteとの状態管理の違いを試す。 | [#48](https://github.com/hayashihiroki-paya/static-minigame/issues/48) |
 | [ハノイの塔](../src/games/hanoi-tower/) | 意図的な技術試行 | 再帰関数で「上のn-1枚を補助棒へ移す・一番大きい円盤を移す・上のn-1枚を目的棒へ移す」に分けて最短手順を生成する。 | 終了条件と3段階の再帰呼び出しから2^n - 1手になることを確かめた。盤面状態の更新と解法一覧を分け、生成した手順を合法手として再生するテストで検証する。 | [#50](https://github.com/hayashihiroki-paya/static-minigame/issues/50) |
 | [さめがめ](../src/games/same-game/) | 意図的な技術試行 | Rustの盤面ルールをwasm-bindgenでWebAssemblyへ変換し、JavaScriptの画面から呼び出す。ViteでWASMとページを静的ファイルへまとめる。 | 別言語のロジックをブラウザーから利用する境界を試す。Rust単体テストに加えNode.jsから実際のWASM APIを呼び、隣接グループ探索、除去、盤面詰め、得点を確認する。 | [#52](https://github.com/hayashihiroki-paya/static-minigame/issues/52) |
+| [倉庫パズル](../src/games/warehouse-puzzle/) | 意図的な技術試行 | 文字列で定義したステージを読み込み、成功した手の直前の状態を履歴の末尾に積む。 | 壁とゴールは固定し、プレイヤーと箱の位置を一組で復元する。全ステージの解答手順をテストで再生して、データと移動ルールを一緒に確認する。 | [#58](https://github.com/hayashihiroki-paya/static-minigame/issues/58) |
 
 ## 今後の更新方法
 
