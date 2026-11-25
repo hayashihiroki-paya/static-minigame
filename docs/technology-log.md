@@ -29,6 +29,7 @@
 | [ハノイの塔](../src/games/hanoi-tower/) | 意図的な技術試行 | 再帰関数で「上のn-1枚を補助棒へ移す・一番大きい円盤を移す・上のn-1枚を目的棒へ移す」に分けて最短手順を生成する。 | 終了条件と3段階の再帰呼び出しから2^n - 1手になることを確かめた。盤面状態の更新と解法一覧を分け、生成した手順を合法手として再生するテストで検証する。 | [#50](https://github.com/hayashihiroki-paya/static-minigame/issues/50) |
 | [さめがめ](../src/games/same-game/) | 意図的な技術試行 | Rustの盤面ルールをwasm-bindgenでWebAssemblyへ変換し、JavaScriptの画面から呼び出す。ViteでWASMとページを静的ファイルへまとめる。 | 別言語のロジックをブラウザーから利用する境界を試す。Rust単体テストに加えNode.jsから実際のWASM APIを呼び、隣接グループ探索、除去、盤面詰め、得点を確認する。 | [#52](https://github.com/hayashihiroki-paya/static-minigame/issues/52) |
 | [倉庫パズル](../src/games/warehouse-puzzle/) | 意図的な技術試行 | 文字列で定義したステージを読み込み、成功した手の直前の状態を履歴の末尾に積む。 | 壁とゴールは固定し、プレイヤーと箱の位置を一組で復元する。全ステージの解答手順をテストで再生して、データと移動ルールを一緒に確認する。 | [#58](https://github.com/hayashihiroki-paya/static-minigame/issues/58) |
+| [日本語タイピング](../src/games/typing-game/) | 意図的な技術試行 | 日本語IMEの変換イベントを追跡し、回答用のEnterと変換確定用のEnterを区別する。 | 変換中の入力は得点に反映せず、回答時刻で制限時間を判定する。変換イベントと30秒の境界をテストする。 | [#60](https://github.com/hayashihiroki-paya/static-minigame/issues/60) |
 
 ## 今後の更新方法
 

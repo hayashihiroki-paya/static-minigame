@@ -1,0 +1,103 @@
+.typing-header {
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.typing-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.typing-card {
+  width: min(100%, 36rem);
+  margin: 0 auto;
+  padding: clamp(0.85rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+}
+
+.typing-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.typing-stats p {
+  margin-bottom: 0.65rem;
+}
+
+.typing-prompt {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.65rem;
+  border-radius: 0.75rem;
+  background: #edf1ff;
+  color: #233766;
+  text-align: center;
+}
+
+.typing-prompt strong {
+  font-size: clamp(1.5rem, 7vw, 2.5rem);
+  overflow-wrap: anywhere;
+}
+
+.typing-card label { font-weight: 700; }
+
+#typing-help {
+  margin: 0.25rem 0 0.65rem;
+  color: #445473;
+}
+
+.typing-controls {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 0.5rem;
+}
+
+.typing-card input,
+.typing-card button {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #6a79a4;
+  border-radius: 0.65rem;
+  font: inherit;
+}
+
+.typing-card input {
+  width: 100%;
+  min-width: 0;
+  background: #fff;
+  color: #222f48;
+}
+
+.typing-card button {
+  background: #3649a5;
+  color: #fff;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.typing-card :disabled {
+  background: #edf0f8;
+  color: #566176;
+}
+
+.typing-status {
+  min-height: 3.5rem;
+  margin: 0.75rem 0;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.65rem;
+  background: #edf1ff;
+  color: #233766;
+}
+
+@media (max-width: 480px) {
+  .typing-controls {
+    grid-template-columns: 1fr;
+  }
+}
