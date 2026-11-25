@@ -50,6 +50,9 @@
         </div>
 
         <div class="game2048-actions">
+          <button id="undo-button" class="game2048-button" type="button" disabled>
+            1手戻す
+          </button>
           <button id="new-game-button" class="game2048-button game2048-button--primary" type="button">
             新しいゲーム
           </button>
@@ -57,6 +60,7 @@
 
         <p class="game2048-help" id="control-help">
           盤面を選択して矢印キーで移動できます。画面の方向ボタンはキーボードとタッチで操作できます。
+          「1手戻す」で直前の移動を取り消せます。
         </p>
         <p id="game-feedback" class="game2048-feedback" role="status" aria-live="polite" aria-atomic="true">
           同じ数字を合わせて2048を目指しましょう。

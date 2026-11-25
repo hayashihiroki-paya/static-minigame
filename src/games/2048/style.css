@@ -191,7 +191,9 @@
 
 .game2048-actions {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  gap: 0.5rem;
   margin-top: 0.9rem;
 }
 
@@ -216,6 +218,12 @@
 
 .game2048-button--primary:hover {
   background: #34479f;
+}
+
+.game2048-button:disabled {
+  background: #edf0f8;
+  color: #566176;
+  cursor: not-allowed;
 }
 
 /* 操作説明と結果を盤面と分け、状態を文字でも確認できるようにします。 */

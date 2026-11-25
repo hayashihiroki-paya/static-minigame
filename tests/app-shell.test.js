@@ -361,6 +361,7 @@ test("2048は一覧から開け、盤面とタッチ可能な方向ボタンを�
   assert.match(game2048Page, /data-direction="left"/);
   assert.match(game2048Page, /data-direction="down"/);
   assert.match(game2048Page, /data-direction="right"/);
+  assert.match(game2048Page, /<button id="undo-button"[^>]*type="button" disabled>\s*1手戻す\s*<\/button>/);
   assert.match(game2048Page, /role="status" aria-live="polite"/);
   assert.match(game2048Page, /<script type="module" src="\.\/main\.js"><\/script>/);
 });

@@ -5,8 +5,11 @@ import {
   BOARD_SIZE,
   TARGET_TILE,
   createInitialGame,
+  createPlaySession,
   hasAvailableMoves,
   moveGame,
+  movePlaySession,
+  undoPlaySession,
 } from "../src/games/2048/logic.js";
 
 /**
@@ -193,4 +196,52 @@ test("移動しても元の盤面配列を変更しない", () => {
 test("不明な移動方向は同じ状態を返す", () => {
   const game = gameFromRows([[2, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]);
   assert.equal(moveGame(game, "diagonal", () => 0.5), game);
+});
+
+test("合成と新規タイルの出現を取り消し、得点と達成状態を復元する", () => {
+  const game = gameFromRows([
+    [1024, 1024, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0],
+  ], { score: 12 });
+  const initial = createPlaySession(game);
+  assert.equal(undoPlaySession(initial), initial);
+
+  const moved = movePlaySession(initial, "left", spawnAtLastEmptyWithTwo());
+  assert.equal(moved.game.board[3][3], 2);
+  assert.equal(moved.game.score, 2060);
+  assert.equal(moved.game.hasWon, true);
+
+  const restored = undoPlaySession(moved);
+  assert.deepEqual(restored, initial);
+  assert.equal(undoPlaySession(restored), restored);
+  assert.equal(movePlaySession(restored, "right", () => 0).previousGame, game);
+});
+
+test("無効な方向では履歴を保持し、次の有効な移動で履歴を置き換える", () => {
+  const initial = createPlaySession(gameFromRows([
+    [0, 4, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0],
+  ]));
+  const first = movePlaySession(initial, "left", () => 0);
+  const unchanged = movePlaySession(first, "left", () => assert.fail("乱数は使われない"));
+  assert.equal(unchanged, first);
+  assert.equal(undoPlaySession(unchanged).game, initial.game);
+
+  const second = movePlaySession(unchanged, "down", () => 0);
+  assert.equal(undoPlaySession(second).game, first.game);
+});
+
+test("ゲームオーバーの最後の手を戻してプレイを再開できる", () => {
+  const initial = createPlaySession(gameFromRows([
+    [2, 2, 8, 4], [8, 4, 2, 4], [4, 2, 8, 2], [8, 4, 2, 8],
+  ]));
+  const over = movePlaySession(initial, "left", () => 0.5);
+  assert.equal(over.game.isGameOver, true);
+  assert.equal(movePlaySession(over, "right"), over);
+  assert.deepEqual(undoPlaySession(over), initial);
+  assert.equal(movePlaySession(undoPlaySession(over), "right", () => 0).previousGame, initial.game);
+});
+
+test("新しいゲームの履歴は空になり、得点は0になる", () => {
+  const newSession = createPlaySession();
+  assert.equal(newSession.game.score, 0);
+  assert.equal(undoPlaySession(newSession), newSession);
 });
