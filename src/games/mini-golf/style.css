@@ -1,0 +1,105 @@
+.golf-header {
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+.golf-page .back-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.golf-card {
+  width: min(100%, 38rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 1.75rem);
+  border: 1px solid #dbe7e2;
+  border-radius: 1.25rem;
+  background: #fff;
+}
+
+.golf-toolbar,
+.golf-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.golf-toolbar p {
+  margin: 0 0 0 auto;
+  font-variant-numeric: tabular-nums;
+}
+
+.golf-card button,
+.golf-card select {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.6rem;
+  border: 1px solid #657f76;
+  border-radius: 0.55rem;
+  background: #edf5ef;
+  color: #183d33;
+  font: inherit;
+  font-weight: 700;
+}
+
+.golf-card button {
+  touch-action: manipulation;
+}
+
+#golf-shot {
+  background: #185745;
+  color: #fff;
+}
+
+.golf-card button[aria-disabled="true"],
+#golf-shot[aria-disabled="true"] {
+  background: #edf0f1;
+  color: #51635e;
+  cursor: not-allowed;
+}
+
+#golf-hint,
+#golf-help {
+  margin: 0.65rem 0;
+  color: #405952;
+}
+
+#golf-course {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 3px solid #103d32;
+  border-radius: 0.65rem;
+}
+
+.golf-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem 1rem;
+}
+
+.golf-adjustment {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.golf-adjustment output {
+  min-width: 4em;
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+#golf-status {
+  min-height: 3rem;
+  margin: 0.75rem 0;
+  padding: 0.45rem 0.7rem;
+  border-radius: 0.55rem;
+  background: #edf5ef;
+  color: #183d33;
+}

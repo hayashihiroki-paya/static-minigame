@@ -31,6 +31,7 @@
 | [倉庫パズル](../src/games/warehouse-puzzle/) | 意図的な技術試行 | 文字列で定義したステージを読み込み、成功した手の直前の状態を履歴の末尾に積む。 | 壁とゴールは固定し、プレイヤーと箱の位置を一組で復元する。全ステージの解答手順をテストで再生して、データと移動ルールを一緒に確認する。 | [#58](https://github.com/hayashihiroki-paya/static-minigame/issues/58) |
 | [日本語タイピング](../src/games/typing-game/) | 意図的な技術試行 | 日本語IMEの変換イベントを追跡し、回答用のEnterと変換確定用のEnterを区別する。 | 変換中の入力は得点に反映せず、回答時刻で制限時間を判定する。変換イベントと30秒の境界をテストする。 | [#60](https://github.com/hayashihiroki-paya/static-minigame/issues/60) |
 | [4レーンリズム](../src/games/rhythm-game/) | 意図的な技術試行 | Web Audioの時計に発音を予約し、同じ基準時刻からノーツの位置と入力の時刻差を計算する。 | 描画間隔が変わっても判定がずれないよう、経過時刻から毎回位置を求める。判定幅の境界と音の予約時刻を自動テストする。 | [#62](https://github.com/hayashihiroki-paya/static-minigame/issues/62) |
+| [ミニゴルフ](../src/games/mini-golf/) | 意図的な技術試行 | 描画に使った時間を蓄積し、8msごとの固定ステップで反射と減速を計算する。 | 余った時間は次の描画まで持ち越し、画面の更新間隔が変わっても同じ順序で物理を進める。異なる更新間隔と全3ホールのクリア手順をテストする。 | [#64](https://github.com/hayashihiroki-paya/static-minigame/issues/64) |
 
 ## 今後の更新方法
 

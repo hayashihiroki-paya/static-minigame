@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="壁での反射を使って3ホールを攻略するミニゴルフです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>ミニゴルフ | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell golf-page">
+      <header class="golf-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>ミニゴルフ</h1>
+        <p class="lead">方向と強さを決めて、少ない打数でカップを狙おう。</p>
+      </header>
+
+      <section class="golf-card" aria-label="コースと操作">
+        <div class="golf-toolbar">
+          <label for="golf-hole">ホール</label>
+          <select id="golf-hole"></select>
+          <p>打数 <strong id="golf-strokes">0</strong></p>
+        </div>
+        <p id="golf-hint"></p>
+        <canvas id="golf-course" width="480" height="300" tabindex="0" role="img"
+          aria-label="ミニゴルフのコース" aria-describedby="golf-hint golf-help">
+          このゲームの描画には Canvas 対応ブラウザーが必要です。
+        </canvas>
+
+        <p id="golf-help">コースにフォーカスして、左右キーで方向、上下キーで強さ、EnterかSpaceで打てます。</p>
+        <div class="golf-controls">
+          <div class="golf-adjustment" role="group" aria-label="方向">
+            <button type="button" aria-label="方向を左に5度回す" data-adjust="left">↶ 左</button>
+            <output id="golf-angle" aria-label="方向">0°</output>
+            <button type="button" aria-label="方向を右に5度回す" data-adjust="right">右 ↷</button>
+          </div>
+          <div class="golf-adjustment" role="group" aria-label="強さ">
+            <button type="button" aria-label="強さを下げる" data-adjust="weaker">−</button>
+            <output id="golf-power" aria-label="強さ">6 / 10</output>
+            <button type="button" aria-label="強さを上げる" data-adjust="stronger">＋</button>
+          </div>
+        </div>
+        <p id="golf-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="golf-actions">
+          <button type="button" id="golf-shot">ショット</button>
+          <button type="button" id="golf-reset">このホールをやり直す</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
