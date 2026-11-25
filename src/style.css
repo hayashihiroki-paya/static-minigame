@@ -141,10 +141,16 @@ h1 {
   transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
 }
 
-/* ポインターとキーボードのどちらでも、選択中のカードを見分けやすくします。 */
+/* タッチ端末でキーボードを使う場合も、フォーカス中のカードを見分けられます。 */
+.game-card:focus-within {
+  transform: translateY(-2px);
+  border-color: #b8c3e6;
+  box-shadow: 0 1rem 2.5rem rgb(34 48 80 / 11%);
+}
+
+/* ホバーの反応は、実際にホバー操作ができるポインターだけに表示します。 */
 @media (hover: hover) {
-  .game-card:hover,
-  .game-card:focus-within {
+  .game-card:hover {
     transform: translateY(-2px);
     border-color: #b8c3e6;
     box-shadow: 0 1rem 2.5rem rgb(34 48 80 / 11%);

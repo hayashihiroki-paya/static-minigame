@@ -18,8 +18,13 @@ test("ボタンの押下反応は有効なボタンだけに適用する", () =>
 });
 
 test("ホームカードはポインターとキーボードの選択状態を示す", () => {
-  // タッチ端末ではhoverに依存せず、キーボードではリンクに合わせてカードを強調します。
-  assert.match(sharedStyles, /@media \(hover: hover\)\s*\{\s*\.game-card:hover,\s*\.game-card:focus-within/);
+  // フォーカス強調はタッチ端末にも適用し、hoverだけを対応ポインターに限定します。
+  const focusWithinPosition = sharedStyles.indexOf(".game-card:focus-within {");
+  const hoverMediaPosition = sharedStyles.indexOf("@media (hover: hover)");
+
+  assert.notEqual(focusWithinPosition, -1);
+  assert.ok(focusWithinPosition < hoverMediaPosition);
+  assert.match(sharedStyles.slice(hoverMediaPosition), /\.game-card:hover\s*\{/);
 });
 
 test("共通スタイルはOSの動きを抑える設定を尊重する", () => {
