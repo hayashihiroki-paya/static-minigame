@@ -1,0 +1,126 @@
+.rhythm-header {
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+.rhythm-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.rhythm-card {
+  width: min(100%, 36rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 1.75rem);
+  border-radius: 1.25rem;
+  background: #fff;
+  text-align: center;
+}
+
+#rhythm-controls {
+  color: #42506a;
+}
+
+.rhythm-track,
+.rhythm-pad {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.25rem;
+}
+
+.rhythm-track {
+  --judge-line: 85%;
+  position: relative;
+  height: clamp(11rem, 36svh, 19rem);
+  overflow: hidden;
+  border-radius: 0.75rem;
+  background: #121d38;
+}
+
+.rhythm-lane {
+  position: relative;
+  background: #233257;
+}
+
+.rhythm-lane:nth-child(even) { background: #1d2a4b; }
+
+.rhythm-line {
+  position: absolute;
+  z-index: 1;
+  top: var(--judge-line);
+  width: 100%;
+  height: 3px;
+  transform: translateY(-50%);
+  background: #fff;
+  box-shadow: 0 0 0 1px #152143;
+}
+
+.rhythm-note {
+  position: absolute;
+  left: 12%;
+  width: 76%;
+  height: 0.9rem;
+  transform: translateY(-50%);
+  border: 2px solid #fff;
+  border-radius: 0.45rem;
+  background: #67dcca;
+}
+
+.rhythm-pad { margin-top: 0.35rem; }
+
+.rhythm-card button {
+  min-height: 2.75rem;
+  padding: 0.4rem 0.65rem;
+  border: 1px solid #5367a0;
+  border-radius: 0.55rem;
+  background: #354b9a;
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.rhythm-card button:disabled {
+  background: #eef1f8;
+  color: #455371;
+}
+
+.rhythm-judgment {
+  min-height: 1.5em;
+  margin: 0.65rem 0 0;
+  color: #233766;
+  font-weight: 700;
+}
+
+.rhythm-counts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  margin: 0.55rem 0;
+}
+
+.rhythm-counts div {
+  padding: 0.4rem 0.2rem;
+  border-radius: 0.5rem;
+  background: #eef1f8;
+  font-size: 0.9rem;
+}
+
+.rhythm-counts dd {
+  margin: 0;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+}
+
+#rhythm-status {
+  margin: 0.6rem 0;
+  color: #42506a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rhythm-card button { transition: none; }
+}
