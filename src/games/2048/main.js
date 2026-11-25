@@ -1,8 +1,9 @@
 // 画面入力と表示だけを担当し、盤面の移動規則はlogic.jsへ委ねます。
 import {
   BOARD_SIZE,
-  createInitialGame,
-  moveGame,
+  createPlaySession,
+  movePlaySession,
+  undoPlaySession,
 } from "./logic.js";
 
 // HTMLの要素を一度取得し、再描画時も同じセルを更新してフォーカスを保ちます。
@@ -10,12 +11,13 @@ const boardElement = document.querySelector("#game2048-board");
 const scoreOutput = document.querySelector("#score-output");
 const feedback = document.querySelector("#game-feedback");
 const newGameButton = document.querySelector("#new-game-button");
+const undoButton = document.querySelector("#undo-button");
 const directionButtons = Array.from(
   document.querySelectorAll(".game2048-direction"),
 );
 
 // ゲーム状態と最後の操作案内を画面側で持ち、ロジックの返り値を表示へ反映します。
-let game = createInitialGame();
+let session = createPlaySession();
 let actionMessage = "";
 const tileCells = [];
 
@@ -48,7 +50,7 @@ function createBoardCells() {
 function renderBoard() {
   for (let row = 0; row < BOARD_SIZE; row += 1) {
     for (let column = 0; column < BOARD_SIZE; column += 1) {
-      const value = game.board[row][column];
+      const value = session.game.board[row][column];
       const cell = tileCells[row][column];
       cell.textContent = value === 0 ? "" : String(value);
       cell.dataset.value = value === 0 ? "empty" : String(value);
@@ -73,11 +75,13 @@ function renderBoard() {
  * @returns {string} 現在のライブ領域メッセージ
  */
 function getFeedbackText() {
-  if (game.isGameOver && game.hasWon) {
-    return "2048を達成しました。これ以上動かせる場所はありません。新しいゲームを始められます。";
-  }
+  const { game, previousGame } = session;
   if (game.isGameOver) {
-    return "ゲームオーバーです。動かせる場所がありません。新しいゲームを始められます。";
+    const result = game.hasWon ? "2048を達成しました。" : "ゲームオーバーです。";
+    const nextAction = previousGame === null
+      ? "新しいゲームを始められます。"
+      : "1手戻すか、新しいゲームを始められます。";
+    return result + "動かせる場所がありません。" + nextAction;
   }
   if (game.hasWon) {
     return actionMessage || "2048を達成しました。続けて遊べます。";
@@ -91,7 +95,8 @@ function getFeedbackText() {
  */
 function render() {
   renderBoard();
-  scoreOutput.textContent = String(game.score);
+  scoreOutput.textContent = String(session.game.score);
+  undoButton.disabled = session.previousGame === null;
   feedback.textContent = getFeedbackText();
 }
 
@@ -101,15 +106,15 @@ function render() {
  * @param {"up"|"down"|"left"|"right"} direction 移動方向
  */
 function handleMove(direction) {
-  const previousGame = game;
-  const nextGame = moveGame(game, direction);
-  if (nextGame === game) {
+  const previousGame = session.game;
+  session = movePlaySession(session, direction);
+  const { game } = session;
+  if (game === previousGame) {
     actionMessage = "その方向には動かせません。";
     render();
     return;
   }
 
-  game = nextGame;
   if (game.isGameOver) {
     actionMessage = "";
   } else if (!previousGame.hasWon && game.hasWon) {
@@ -143,9 +148,20 @@ for (const button of directionButtons) {
   });
 }
 
-// 新しいゲームではスコアと達成状態を初期化し、操作起点を盤面へ戻します。
+undoButton.addEventListener("click", () => {
+  const restored = undoPlaySession(session);
+  if (restored === session) return;
+
+  session = restored;
+  actionMessage = "1手戻しました。スコアは" + session.game.score + "です。";
+  render();
+  // 使ったボタンは無効になるため、矢印キーを使える盤面へフォーカスを戻します。
+  boardElement.focus();
+});
+
+// 新しいゲームでは盤面・得点・履歴を初期化し、操作起点を盤面へ戻します。
 newGameButton.addEventListener("click", () => {
-  game = createInitialGame();
+  session = createPlaySession();
   actionMessage = "新しいゲームを始めました。";
   render();
   boardElement.focus();

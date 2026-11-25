@@ -247,3 +247,23 @@ export function moveGame(game, direction, random = Math.random) {
     isGameOver: !hasAvailableMoves(board),
   };
 }
+
+/** 履歴が空のプレイを作ります。新しいゲームでも同じ初期化を使います。 */
+export function createPlaySession(game = createInitialGame()) {
+  return { game, previousGame: null };
+}
+
+/** 有効な移動の直前だけを記録します。moveGameは元の盤面を変更しません。 */
+export function movePlaySession(session, direction, random = Math.random) {
+  const game = moveGame(session.game, direction, random);
+  if (game === session.game) return session;
+
+  // 盤面が同じまま終了判定だけが更新された場合は、最後の有効な手を残します。
+  const previousGame = game.board === session.game.board ? session.previousGame : session.game;
+  return { game, previousGame };
+}
+
+/** 盤面・得点・達成と終了の状態を一緒に戻し、使った履歴を消します。 */
+export function undoPlaySession(session) {
+  return session.previousGame === null ? session : createPlaySession(session.previousGame);
+}
