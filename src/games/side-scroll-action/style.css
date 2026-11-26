@@ -1,0 +1,78 @@
+.platform-header {
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+.platform-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.platform-card {
+  width: min(100%, 44rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  border: 1px solid #dbe5ef;
+  border-radius: 1.25rem;
+  background: #fff;
+}
+
+#platform-help {
+  margin-bottom: 0.65rem;
+  color: #445674;
+}
+
+#platform-course {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 2px solid #536a84;
+  border-radius: 0.75rem;
+  background: #d1ecfa;
+}
+
+.platform-controls {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) minmax(0, 1.5fr);
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.platform-card button {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid #596dae;
+  border-radius: 0.65rem;
+  background: #e9efff;
+  color: #22396f;
+  font: inherit;
+  font-weight: 700;
+}
+
+.platform-controls button {
+  /* 押したまま移動できるよう、操作ボタンの範囲だけスクロールに使いません。 */
+  touch-action: none;
+  user-select: none;
+}
+
+.platform-controls button[data-control="jump"] {
+  background: #304789;
+  color: #fff;
+}
+
+.platform-controls button[aria-disabled="true"] {
+  background: #edf0f5;
+  color: #536078;
+}
+
+#platform-status {
+  margin: 0.75rem 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.55rem;
+  background: #e9f2fd;
+  color: #243b61;
+}
