@@ -13,6 +13,7 @@ let loading = false;
 const cells = [];
 
 function selectCell(index, focus = false) {
+  // 選択中のマスだけをTabの移動先にし、盤面内は矢印キーで移動します。
   cells[selected].button.tabIndex = -1;
   cells[selected].cell.setAttribute("aria-selected", "false");
   selected = index;
@@ -115,6 +116,7 @@ function finishLoading(message) {
 }
 
 function requestPuzzle() {
+  // 新しい要求を受けたら前の探索を中断します。前の問題は表示したまま入力を止めます。
   worker?.terminate();
   worker = null;
   loading = true;
@@ -131,10 +133,12 @@ function requestPuzzle() {
   };
 
   try {
+    // 相対URLはこのモジュールを基準に解決し、Worker側でもimportを使えるようにします。
     current = new Worker(new URL("./generator-worker.js", import.meta.url), { type: "module" });
     worker = current;
     current.addEventListener("message", ({ data }) => {
-      // 再生成で破棄されたWorkerからの応答は盤面に反映しません。
+      // すでに処理待ちの応答があっても、現在のWorkerの応答だけを採用します。
+      // Workerの参照で照合するため、問題の内容や応答の到着順には依存しません。
       if (worker !== current) return;
       if (!Array.isArray(data) || data.length !== CELL_COUNT
         || !data.every((value) => Number.isInteger(value) && value >= 0 && value <= SIZE)
@@ -144,6 +148,7 @@ function requestPuzzle() {
       }
       current.terminate();
       worker = null;
+      // 盤面を操作中なら新しい空欄へ案内し、ほかの操作中ならフォーカスを奪いません。
       const boardHadFocus = grid.contains(document.activeElement);
       game = createGame(data);
       grid.hidden = false;
@@ -153,6 +158,7 @@ function requestPuzzle() {
     });
     current.addEventListener("error", fail);
     current.addEventListener("messageerror", fail);
+    // プレイ中の入力を含めず、前回の出題そのものと比較します。
     current.postMessage(game?.givens ?? null);
   } catch {
     if (current) fail();
