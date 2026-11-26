@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="空の足場をジャンプで渡る横スクロールアクションです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>空の足場 | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell platform-page">
+      <header class="platform-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>空の足場</h1>
+        <p class="lead">足場を飛び渡って、オレンジの旗を目指そう。</p>
+      </header>
+
+      <section class="platform-card" aria-label="横スクロールアクション">
+        <p id="platform-help">コースにフォーカスして、←・→で移動、Spaceでジャンプ。画面のボタンも使えます。</p>
+        <div id="platform-play">
+          <canvas id="platform-course" width="600" height="320" tabindex="0" role="img"
+            aria-describedby="platform-help" aria-label="空に浮かぶ足場のコース">
+            このゲームの描画には Canvas 対応ブラウザーが必要です。
+          </canvas>
+          <div class="platform-controls" role="group" aria-label="移動とジャンプ">
+            <button type="button" data-control="left" aria-label="左へ移動">← 左</button>
+            <button type="button" data-control="right" aria-label="右へ移動">右 →</button>
+            <button type="button" data-control="jump">ジャンプ</button>
+          </div>
+        </div>
+        <p id="platform-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <button type="button" id="platform-retry">最初から</button>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
