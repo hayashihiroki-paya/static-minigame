@@ -1,0 +1,127 @@
+.sudoku-header {
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+.sudoku-page .back-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.sudoku-card {
+  width: min(100%, 34rem);
+  margin: 0 auto;
+  padding: clamp(0.45rem, 3vw, 1.5rem);
+  border: 1px solid #dbe4ec;
+  border-radius: 1rem;
+  background: #fff;
+}
+
+.sudoku-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.45rem;
+}
+
+.sudoku-toolbar p,
+#sudoku-help {
+  margin: 0.4rem 0;
+  color: #3c4b63;
+}
+
+#sudoku-empty { margin-left: 0.45rem; }
+
+#sudoku-grid {
+  border: 2px solid #405171;
+  margin: 0.7rem 0;
+}
+
+#sudoku-grid [role="row"] {
+  display: grid;
+  grid-template-columns: repeat(9, minmax(0, 1fr));
+}
+
+#sudoku-grid [role="gridcell"] {
+  border-right: 1px solid #acb8ca;
+  border-bottom: 1px solid #acb8ca;
+}
+
+#sudoku-grid [role="gridcell"]:nth-child(3n) { border-right: 2px solid #405171; }
+#sudoku-grid [role="row"]:nth-child(3n) [role="gridcell"] { border-bottom: 2px solid #405171; }
+#sudoku-grid [role="gridcell"]:last-child { border-right: 0; }
+#sudoku-grid [role="row"]:last-child [role="gridcell"] { border-bottom: 0; }
+
+#sudoku-grid button {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  padding: 0;
+  border: 0;
+  background: #fff;
+  color: #1946a3;
+  font: inherit;
+  font-size: clamp(1rem, 5vw, 1.6rem);
+  touch-action: manipulation;
+}
+
+#sudoku-grid [data-fixed="true"] button {
+  background: #eef1f6;
+  color: #253450;
+  font-weight: 800;
+}
+
+#sudoku-grid [aria-selected="true"] button {
+  background: #d8e6ff;
+  box-shadow: inset 0 0 0 2px #3b62a0;
+}
+
+#sudoku-grid [data-conflict="true"] button {
+  background: #ffebe6;
+  color: #81221f;
+  text-decoration: underline double;
+}
+
+#sudoku-grid button:focus-visible {
+  position: relative;
+  outline-offset: -3px;
+}
+
+.sudoku-keypad {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.35rem;
+}
+
+.sudoku-toolbar button,
+.sudoku-keypad button {
+  min-height: 2.75rem;
+  padding: 0.25rem;
+  border: 1px solid #61739d;
+  border-radius: 0.5rem;
+  background: #edf2ff;
+  color: #223765;
+  font: inherit;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+.sudoku-toolbar button { padding-inline: 0.65rem; }
+
+.sudoku-keypad button[aria-disabled="true"] {
+  background: #f0f2f4;
+  color: #53617c;
+}
+
+#sudoku-status {
+  min-height: 3rem;
+  margin: 0.7rem 0 0;
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.55rem;
+  background: #edf2fb;
+  color: #233765;
+}

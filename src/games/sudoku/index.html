@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="解が一つの9×9の問題を生成して遊べる数独です。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>数独 | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell sudoku-page">
+      <header class="sudoku-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>数独</h1>
+        <p class="lead">行・列・3×3のブロックに、1から9を一つずつ入れよう。</p>
+      </header>
+      <section class="sudoku-card" aria-label="数独の盤面と操作">
+        <div class="sudoku-toolbar">
+          <p>初級 <span id="sudoku-empty"></span></p>
+          <button id="sudoku-new" type="button">新しい問題</button>
+        </div>
+        <p id="sudoku-help">マスを選び、数字キーか下のボタンで入力。矢印キーで移動し、Delete・Backspaceで消せます。</p>
+        <div id="sudoku-grid" role="grid" aria-label="9行9列の数独" aria-describedby="sudoku-help" hidden></div>
+        <div id="sudoku-keypad" class="sudoku-keypad" role="group" aria-label="数字の入力"></div>
+        <p id="sudoku-status" role="status" aria-live="polite" aria-atomic="true">問題を生成しています。</p>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
