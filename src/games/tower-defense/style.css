@@ -1,0 +1,128 @@
+.defense-header {
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+.defense-page .back-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.defense-card {
+  width: min(100%, 38rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 3vw, 1.5rem);
+  border: 1px solid #dbe5e0;
+  border-radius: 1.25rem;
+  background: #fff;
+}
+
+.defense-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.35rem;
+  margin: 0 0 0.65rem;
+}
+
+.defense-stats div {
+  padding: 0.4rem 0.2rem;
+  border-radius: 0.6rem;
+  background: #e8f3ec;
+  color: #254b3e;
+  text-align: center;
+}
+
+.defense-stats dt {
+  font-size: 0.85rem;
+}
+
+.defense-stats dd {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+#defense-help,
+.defense-legend {
+  margin: 0.55rem 0;
+  color: #43584f;
+  font-size: 0.95rem;
+}
+
+.defense-map {
+  position: relative;
+  border: 2px solid #466f54;
+  border-radius: 0.75rem;
+}
+
+#defense-board {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.6rem;
+}
+
+#defense-sites {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.defense-card button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.55rem;
+  border: 2px solid #4d6a60;
+  border-radius: 0.55rem;
+  background: #f4faf6;
+  color: #18392d;
+  font: inherit;
+  font-weight: 700;
+  touch-action: manipulation;
+}
+
+#defense-sites button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  pointer-events: auto;
+}
+
+#defense-sites button[data-built="true"] {
+  border-color: #3f346c;
+  background: #3f346c;
+  color: #fff;
+}
+
+.defense-card button[aria-disabled="true"] {
+  cursor: not-allowed;
+}
+
+#defense-start {
+  background: #245b48;
+  color: #fff;
+}
+
+#defense-start[aria-disabled="true"] {
+  background: #edf2ef;
+  color: #50655f;
+}
+
+.defense-actions,
+.defense-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem 0.75rem;
+}
+
+#defense-status {
+  min-height: 3rem;
+  margin: 0.55rem 0;
+  padding: 0.45rem 0.65rem;
+  border-radius: 0.55rem;
+  background: #e8f3ec;
+  color: #254b3e;
+}

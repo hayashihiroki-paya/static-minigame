@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="タワーを配置して3ウェーブから拠点を守るタワーディフェンスです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>タワーディフェンス | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell defense-page">
+      <header class="defense-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>タワーディフェンス</h1>
+        <p class="lead">道沿いにタワーを配置して、3ウェーブから拠点を守ろう。</p>
+      </header>
+
+      <section class="defense-card" aria-label="マップと操作">
+        <dl class="defense-stats">
+          <div><dt>コイン</dt><dd id="defense-coins">60</dd></div>
+          <div><dt>拠点の耐久</dt><dd id="defense-health">6</dd></div>
+          <div><dt>ウェーブ</dt><dd id="defense-wave">1 / 3</dd></div>
+        </dl>
+        <p id="defense-help">タワー1基に30コイン必要です。ウェーブ開始前に設置マスを選んでください。</p>
+        <div class="defense-map">
+          <canvas id="defense-board" width="520" height="350" role="img"
+            aria-label="入口から右へ進み、折り返して右下の拠点に着く道">
+            このゲームの地図の描画には Canvas 対応ブラウザーが必要です。
+          </canvas>
+          <div id="defense-sites" role="group" aria-label="タワーの設置マス" aria-describedby="defense-help"></div>
+        </div>
+        <div class="defense-legend"><span>→ 入口</span><span>◆ 拠点</span><span>▲ 設置済みタワー</span></div>
+        <p id="defense-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        <div class="defense-actions">
+          <button id="defense-start" type="button">ウェーブ開始</button>
+          <button id="defense-reset" type="button">最初から</button>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>
