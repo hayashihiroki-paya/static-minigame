@@ -35,6 +35,7 @@
 | [空の足場](../src/games/side-scroll-action/) | 意図的な技術試行 | 足場を離れた時刻とジャンプを押した時刻を固定ステップの時計で記録し、それぞれ100msの猶予を設ける。 | 足場を離れた直後や着地直前の操作に応えつつ、消費済みの入力が空中で再発動しないことをテストする。 | [#66](https://github.com/hayashihiroki-paya/static-minigame/issues/66) |
 | [タワーディフェンス](../src/games/tower-defense/) | 意図的な技術試行 | 出現時刻・耐久・速度をウェーブデータにし、進行ループで時刻に達した相手を出現させる。 | 出現間隔と難易度のデータを処理から独立させる。ルート上の距離で狙う順序を決め、出現時刻・射程・全ウェーブの配置手順を自動テストする。 | [#68](https://github.com/hayashihiroki-paya/static-minigame/issues/68) |
 | [数独](../src/games/sudoku/) | 意図的な技術試行 | 解の一意性を調べる問題生成をWeb Workerで実行する。 | 解を2つ見つけた時点で探索を打ち切り、候補が一つのマスだけで解ける問題を採用する。画面は生成のやり直しを受け付け、古いWorkerを破棄する。 | [#70](https://github.com/hayashihiroki-paya/static-minigame/issues/70) |
+| [マッチ3パズル](../src/games/match3/) | 意図的な技術試行 | 一次元配列の盤面を横・縦に走査して同時マッチを検出し、列の安定詰めと連鎖解決を行う。乱数関数を注入し、盤面生成と補充を再現可能にする。 | 色を消す前にマッチ集合を確定すると交差も同時に消せる。落下後に再走査して連鎖を見つけ、補充色が単独で新しいマッチを作らないことで処理を有限に保つ。 | [#72](https://github.com/hayashihiroki-paya/static-minigame/issues/72) |
 
 ## 今後の更新方法
 

@@ -1,0 +1,170 @@
+.match3-header {
+  margin: 0 auto 1.5rem;
+  text-align: center;
+}
+
+.match3-page .back-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.match3-card {
+  width: min(100%, 39rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.match3-card h2 {
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.match3-help {
+  max-width: 34rem;
+  margin: 0 auto 1rem;
+  color: #566176;
+  line-height: 1.7;
+  text-align: center;
+}
+
+.match3-chain {
+  margin: 0 auto 0.7rem;
+  color: #38445b;
+  font-weight: 700;
+  text-align: center;
+}
+
+.match3-chain strong {
+  display: inline-grid;
+  min-width: 2rem;
+  place-items: center;
+  color: #344b9c;
+  font-size: 1.2rem;
+}
+
+/* CSS Gridで8列を保ち、同じ一次元配列の並びをそのまま画面へ写します。 */
+.match3-board {
+  display: grid;
+  width: min(100%, 34rem);
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: clamp(0.15rem, 1vw, 0.4rem);
+  margin: 0 auto;
+  touch-action: manipulation;
+}
+
+.match3-row {
+  display: contents;
+}
+
+.match3-cell {
+  display: grid;
+  min-width: 0;
+  aspect-ratio: 1;
+  place-items: center;
+  padding: 0;
+  border: 2px solid transparent;
+  border-radius: clamp(0.35rem, 1.5vw, 0.7rem);
+  background: #e9edf5;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+  font-size: clamp(1rem, 5vw, 2rem);
+  line-height: 1;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.match3-cell[data-piece="ruby"] {
+  background: linear-gradient(145deg, #f28da0, #c83255);
+}
+
+.match3-cell[data-piece="sapphire"] {
+  background: linear-gradient(145deg, #7daafa, #3159bd);
+}
+
+.match3-cell[data-piece="leaf"] {
+  background: linear-gradient(145deg, #71c99b, #248153);
+}
+
+.match3-cell[data-piece="sun"] {
+  background: linear-gradient(145deg, #ffd56a, #d58a18);
+  color: #56360b;
+}
+
+.match3-cell[data-piece="grape"] {
+  background: linear-gradient(145deg, #bb9af3, #7044b2);
+}
+
+.match3-cell__symbol {
+  filter: drop-shadow(0 1px 1px rgb(0 0 0 / 20%));
+}
+
+/* 選択は枠と外側の影の両方で示し、色だけに頼らず交換元を伝えます。 */
+.match3-cell.is-selected {
+  z-index: 1;
+  border-color: #1b263a;
+  box-shadow: 0 0 0 3px #fff, 0 0 0 6px #1b263a;
+}
+
+@media (hover: hover) {
+  .match3-cell:hover {
+    filter: brightness(1.08);
+  }
+}
+
+.match3-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.match3-reset {
+  min-height: 2.9rem;
+  padding: 0.55rem 1.1rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.7rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+.match3-feedback {
+  min-height: 3.5rem;
+  margin: 0.8rem 0 0;
+  padding: 0.7rem 0.85rem;
+  border-radius: 0.7rem;
+  background: #f0f3ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+@media (max-width: 520px) {
+  .match3-card {
+    padding: 0.65rem;
+  }
+
+  .match3-board {
+    gap: 0.12rem;
+  }
+
+  .match3-cell {
+    border-width: 1px;
+  }
+
+  .match3-cell.is-selected {
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px #1b263a;
+  }
+}
