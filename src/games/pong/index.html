@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="ラケットを動かしてボールを打ち返し、CPUより先に5点取る卓球ゲームです。" />
+    <link rel="stylesheet" href="../../style.css" />
+    <link rel="stylesheet" href="./style.css" />
+    <title>卓球ゲーム | ミニゲーム集</title>
+  </head>
+  <body>
+    <main class="page-shell pong-page">
+      <header class="pong-header">
+        <a class="back-link" href="../../../index.html">← ゲーム一覧へ</a>
+        <h1>卓球ゲーム</h1>
+        <p class="lead">ラリーを続けて、CPUより先に5点取ろう。</p>
+      </header>
+
+      <section class="pong-card" aria-labelledby="pong-heading">
+        <h2 id="pong-heading">あなた vs CPU</h2>
+        <div class="pong-scoreboard" aria-label="現在のスコア">
+          <p>あなた <strong id="pong-player-score">0</strong></p>
+          <span aria-hidden="true">:</span>
+          <p>CPU <strong id="pong-cpu-score">0</strong></p>
+        </div>
+
+        <p id="pong-help" class="pong-help">
+          上下矢印キーまたはW/Sで動かせます。画面ではコート内をタッチしてドラッグしてください。
+        </p>
+        <div id="pong-game" class="pong-game" aria-label="卓球ゲームのコート"></div>
+        <p id="pong-status" class="pong-status" role="status" aria-live="polite" aria-atomic="true">
+          ゲームを準備しています。
+        </p>
+        <div class="pong-actions">
+          <button id="pong-restart" type="button">最初から遊ぶ</button>
+        </div>
+      </section>
+
+      <footer class="site-footer">
+        <p>ボールを打つ位置で、跳ね返る角度が変わります。</p>
+      </footer>
+    </main>
+    <script type="module" src="./bootstrap.js"></script>
+  </body>
+</html>

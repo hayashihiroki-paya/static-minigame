@@ -1,0 +1,119 @@
+.pong-header {
+  margin: 0 auto 1.25rem;
+  text-align: center;
+}
+
+.pong-page .back-link {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  color: #3649a5;
+  font-weight: 700;
+}
+
+.pong-card {
+  width: min(100%, 54rem);
+  margin: 0 auto;
+  padding: clamp(0.75rem, 4vw, 2rem);
+  border: 1px solid #dfe5f2;
+  border-radius: 1.5rem;
+  background: #fff;
+  box-shadow: 0 1rem 3rem rgb(34 48 80 / 7%);
+}
+
+.pong-card h2 {
+  margin-bottom: 0.45rem;
+  text-align: center;
+}
+
+.pong-scoreboard {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1rem, 6vw, 3rem);
+  margin-bottom: 0.5rem;
+  color: #263456;
+  font-size: clamp(1.1rem, 4vw, 1.5rem);
+  font-weight: 800;
+}
+
+.pong-scoreboard p {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0;
+}
+
+.pong-scoreboard strong {
+  min-width: 1.5em;
+  color: #344b9c;
+  font-size: 1.4em;
+  text-align: center;
+}
+
+.pong-help {
+  margin: 0 auto 0.65rem;
+  color: #566176;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* PhaserのFITスケールはこの16:9枠に合わせてcanvasを縮小します。 */
+.pong-game {
+  width: min(100%, 50rem);
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2px solid #344960;
+  border-radius: 0.8rem;
+  background: #10243a;
+  touch-action: none;
+}
+
+.pong-game canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  touch-action: none;
+}
+
+.pong-status {
+  min-height: 3.25rem;
+  margin: 0.7rem 0 0;
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.65rem;
+  background: #eef2ff;
+  color: #263a91;
+  font-weight: 800;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.pong-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.pong-actions button {
+  min-height: 2.8rem;
+  padding: 0.55rem 1rem;
+  border: 1px solid #cbd3e8;
+  border-radius: 0.7rem;
+  background: #f7f8ff;
+  color: #263456;
+  cursor: pointer;
+  font: inherit;
+  font-weight: 800;
+  touch-action: manipulation;
+}
+
+@media (max-width: 520px) {
+  .pong-card {
+    padding: 0.65rem;
+  }
+
+  .pong-game {
+    border-radius: 0.45rem;
+  }
+}

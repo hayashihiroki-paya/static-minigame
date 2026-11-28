@@ -40,5 +40,7 @@ jobs:
         run: npm run build:snake
       - name: もぐらたたきの静的ファイルをビルド
         run: npm run build:whack-a-mole
+      - name: Phaser卓球ゲームの静的ファイルをビルド
+        run: npm run build:pong
       - name: さめがめのWASM静的ファイルをビルド
         run: npm run build:same-game

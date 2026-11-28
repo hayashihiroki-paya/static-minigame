@@ -36,6 +36,7 @@
 | [タワーディフェンス](../src/games/tower-defense/) | 意図的な技術試行 | 出現時刻・耐久・速度をウェーブデータにし、進行ループで時刻に達した相手を出現させる。 | 出現間隔と難易度のデータを処理から独立させる。ルート上の距離で狙う順序を決め、出現時刻・射程・全ウェーブの配置手順を自動テストする。 | [#68](https://github.com/hayashihiroki-paya/static-minigame/issues/68) |
 | [数独](../src/games/sudoku/) | 意図的な技術試行 | 解の一意性を調べる問題生成をWeb Workerで実行する。 | 解を2つ見つけた時点で探索を打ち切り、候補が一つのマスだけで解ける問題を採用する。画面は生成のやり直しを受け付け、古いWorkerを破棄する。 | [#70](https://github.com/hayashihiroki-paya/static-minigame/issues/70) |
 | [マッチ3パズル](../src/games/match3/) | 意図的な技術試行 | 一次元配列の盤面を横・縦に走査して同時マッチを検出し、列の安定詰めと連鎖解決を行う。乱数関数を注入し、盤面生成と補充を再現可能にする。 | 色を消す前にマッチ集合を確定すると交差も同時に消せる。落下後に再走査して連鎖を見つけ、補充色が単独で新しいマッチを作らないことで処理を有限に保つ。 | [#72](https://github.com/hayashihiroki-paya/static-minigame/issues/72) |
+| [卓球ゲーム](../src/games/pong/) | 意図的な技術試行 | Phaser 3.90.0。SceneのライフサイクルとArcade Physicsによる速度・衝突、Scene入力プラグインのキー・ポインター・タッチを使う。Viteでnpm依存を含む静的ファイルへバンドルし、Phaser本体はgzipで配布してブラウザーのDecompressionStreamで起動する。 | 毎フレームの更新と物理衝突をSceneへ任せ、得点・勝敗・CPU速度制限はNode.jsでテストできるJavaScript関数に分ける。静的ホストでサーバー設定に頼らず圧縮データを展開し、MITライセンスと依存ライブラリの表示を出力へ含める。 | [#74](https://github.com/hayashihiroki-paya/static-minigame/issues/74) |
 
 ## 今後の更新方法
 

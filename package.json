@@ -15,6 +15,7 @@
     "build": "vite build",
     "build:snake": "vite build --config vite.snake.config.js",
     "build:whack-a-mole": "vite build --config vite.whack-a-mole.config.js",
+    "build:pong": "vite build --config vite.pong.config.js && node scripts/compress-pong.js",
     "build:same-game:wasm": "wasm-pack build src/games/same-game --target web --release --no-opt --out-dir pkg --out-name same_game",
     "build:same-game": "npm run build:same-game:wasm && vite build --config vite.same-game.config.js"
   },
@@ -26,6 +27,7 @@
     "vite": "^8.3.8"
   },
   "dependencies": {
+    "phaser": "3.90.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   }
